@@ -1,0 +1,92 @@
+---
+layout: post
+title: I'm back
+---
+# I'm back
+
+Ok I know it's been a while since I've posted anything here but I kinda went to Syria then I ended up moving to Columbia, Missouri. I'm still not settled in and stuff is still crazy.... The last month/two months have been really crazy.
+
+Any way back to whats important. I set up a mySpace page (Shudder!!) and the default look for the profile is kinda dull so I decided to spice it up a little bit using CSS... Well if you've never looked at the source for your myspace profile, Dont! That is some fucked up code. But I decided that I should try and analyze it so I could add some bitchin css to my ultra cool myspace page.
+
+First off I started to read a little bit of it and try to figure out how it was organized. Every time I'd hit an Id or class tag I would make a note of it in my little TextMate window. Here are the notes:
+
+
+    *remember to look for bluetext
+    
+    class=tdborder tabled with brders?. type: "td"
+    
+    class=orangetext15 Orange headers. type: "span"
+    
+    class=btext blacktext?. type: "span"
+    
+    class=blacktext10 blacktext. type: "span"
+    
+    class=redbtext red text? colored Numbers. type: "span"
+    
+    class=navigationBar  The Navigation Bar. type: "table"
+    
+    class=navbar The navigation bar elements. type: "a"
+    
+    class=profileInfo The profile info box. type: "table"
+    
+    id=Table2 The profile info inner table. type: "table"
+    
+    class=contactTable The Contact me table. type: "table"
+    
+    class=userProfileURL The user profile URL box. type: "table"
+    
+    class=userProfileDetail The profile detail box. type: "table"
+    
+    class=latestBlogEnrty latest blog ENTRIES. type: "table"
+    
+    class=blurbs The blurb box. type: "table"
+    
+    class=friendSpace Box with friends pictures. type: "table"
+    
+    class=friendsComments friends comments. type: "table"
+    
+    class=commentslinks . type: "div"
+    
+    
+
+So I decided to use those little classes and Ids as a starting point. I wrote a little CSS and pasted it in my About Me box, update, looks kinda like what I wanted. After a couple more tries I finally found out that I can't quite get to the elements that I want to change. A new line of attack was needed
+
+I figured that a good re-startign point would be to get the names of all the classes in my myspace profile so I wrote up this nice sweet little script to do the job for me:
+
+```
+#!/usr/bin/python
+
+import HTMLParser
+import sys
+
+class ClassFinder(HTMLParser.HTMLParser):
+    def __init__(self):
+ HTMLParser.HTMLParser.__init__(self)
+ self.found_classes = {}
+
+    def handle_starttag(self, tag, attrs):
+ for name, val in attrs:
+     if name == "class":
+  if not self.found_classes.has_key(val):
+      self.found_classes[val] = [tag]
+  elif not tag in self.found_classes[val]:
+      self.found_classes[val].append(tag)
+    
+    def print_findings(self):
+ for cls, tags in self.found_classes.iter():
+     print cls
+     for tag in tags:
+  print "\t", tag
+
+if __name__=="__main__":
+    cf = ClassFinder()
+    cf.feed(sys.stdin.read())
+    cf.print_findings()
+
+```
+
+I dont' event know if it works because I wrote it up at like 12:30am. So I run my profile through it and I get a Pare Error, fuck... I though about using BeautifulSoap to try and solve the problem but I have never used it and I didn't feel like learning a new library so soon before bed
+
+So after all that work a quick google search tuned up a pretty cool copy/paste profile skin... I will defiantly edit it soon but until then I have an anonymous web designer to thank for my Ultra Cool profile page.
+
+
