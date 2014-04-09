@@ -1,3 +1,5 @@
 name: Circuits Of Imagination
 markdown: redcarpet
 pygments: true
+safe: true
+lsi: false
