@@ -1,4 +1,6 @@
 name: Circuits Of Imagination
+description: Thoughts about computers, programming, the net and the world.
+url: http://blog.circuitsofimagination.com
 markdown: redcarpet
 pygments: true
 safe: true
