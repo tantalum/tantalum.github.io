@@ -23,20 +23,22 @@
   </head>
   <body>
     <!-- Top Bar -->
-    <nav class="tab-bar">
-      <section class="left-small">
-        <a class="left-off-canvas-toggle menu-icon"><span></span></a>
-      </section>
+    <nav class="navbar navbar-default" role="navigation">
       <section class="middle tab-bar-section">
-        <a href="/"><h1 class="title">Circuits Of Imagination</h1></a>
+        <a href="/" class="navbar-brand">Circuits Of Imagination</a>
       </section>
+      <ul class="nav navbar-nav pull-right">
+        <li><a href="https://github.com/tantalum">Code</a></li>
+        <li><a href="http://snippets.circuitsofimagination.com/">Snippets</a></li>
+        <li><a href="https://twitter.com/blit32">Twitter</a></li>
+      </ul>
     </nav>
 
     <!-- Post Navigation -->
     <aside class="colum col-sm-3">
-      <ul class="post-nav-list off-canvas-list">
+      <ul class="list-group">
         {% for post in site.posts %}
-        <li class="post-nav-item">
+        <li class="list-group-item">
           <a href="{{ post.url }}">{{ post.title }}</a>
         </li>
         {% endfor %}
