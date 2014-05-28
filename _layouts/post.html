@@ -1,11 +1,12 @@
 ---
 layout: default
 ---
-<section class="post">
-  <div class="post-meta">
-    <p class="post-meta-date pull-right xsmall">{{ page.date | date_to_string }}</p>
+<section class="post panel panel-default">
+  <div class="post-meta panel-heading">
+    {{ page.title }}
+    <p class="post-meta-date pull-right">{{ page.date | date_to_string }}</p>
   </div>
-  <div class="post-content">
+  <div class="post-content panel-body">
     {{ content }}
   </div>
   <div class="disqus">

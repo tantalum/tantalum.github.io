@@ -6,11 +6,12 @@ title: Circuits Of Imagination Blog
 <div id="home">
   <div class="posts">
     {% for post in paginator.posts %}
-    <section class="post">
-      <div class="post-meta">
-	<p class="post-meta-date pull-right xsmall">{{ post.date | date_to_string }}</p>
+    <section class="post panel panel-default">
+      <div class="post-meta panel-heading">
+        {{ post.title }}
+	<p class="post-meta-date pull-right">{{ post.date | date_to_string }}</p>
       </div>
-      <div class="post-content">
+      <div class="post-content panel-body">
 	{{ post.content }}
       </div>
     </section>
