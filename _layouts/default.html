@@ -8,10 +8,16 @@
 
     <title>{{ page.title }}</title>
 
-    <!-- [Foundation ](http://foundation.zurb.com) -->
+    <!-- ShareThis.com -->
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
+    <!-- END ShareThis.com -->
+    
+    <!-- [Boostrap ](http://getbootstrap.com) -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
-    <!-- END Foundation -->
+    <!-- END Boostrap -->
     
     <!-- syntax highlighting CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -19,7 +25,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     
-    <script src="/foundation/js/vendor/modernizr.js"></script>
   </head>
   <body>
     <!-- Top Bar -->
@@ -53,6 +58,13 @@
     <!-- Every page needs these :-P -->
     <script type="text/javascript" src="/js/vendor/jquery-1.11.1.min.js"></script>
     <!-- Done -->
-    
+
+    <!-- ShareThis.com -->
+    <script type="text/javascript">stLight.options({publisher: "22124e2d-3f87-4114-a0f9-fa51fc6f9465", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+    <script>
+     var options={ "publisher": "22124e2d-3f87-4114-a0f9-fa51fc6f9465", "logo": { "visible": true, "url": "http://blog.circuitsofimagination.com/", "img": "http://sd.sharethis.com/disc/images/demo_logo.png", "height": 45}, "ad": { "visible": false, "openDelay": "5", "closeDelay": "0"}, "livestream": { "domain": "", "type": "sharethis"}, "ticker": { "visible": false, "domain": "", "title": "", "type": "sharethis"}, "facebook": { "visible": false, "profile": "sharethis"}, "fblike": { "visible": false, "url": ""}, "twitter": { "visible": false, "user": "sharethis"}, "twfollow": { "visible": false}, "custom": [{ "visible": false, "title": "Custom 1", "url": "", "img": "", "popup": false, "popupCustom": { "width": 300, "height": 250}}, { "visible": false, "title": "Custom 2", "url": "", "img": "", "popup": false, "popupCustom": { "width": 300, "height": 250}}, { "visible": false, "title": "Custom 3", "url": "", "img": "", "popup": false, "popupCustom": { "width": 300, "height": 250}}], "chicklets": { "items": ["twitter", "reddit", "tumblr", "googleplus", "facebook", "email", "sharethis"]}};
+     var st_bar_widget = new sharethis.widgets.sharebar(options);
+    </script>
+    <!-- END ShareThis.com -->
   </body>
 </html>
