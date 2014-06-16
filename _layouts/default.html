@@ -43,9 +43,11 @@
     <aside class="colum col-sm-3">
       <ul class="list-group">
         {% for post in site.posts %}
-        <li class="list-group-item">
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        </li>
+        {% if post.id == page.id %}
+        <a href="{{ post.url }}" class="list-group-item active">{{ post.title }}</a>
+        {% else %}
+        <a href="{{ post.url }}" class="list-group-item">{{ post.title }}</a>
+        {% endif %}
         {% endfor %}
       </ul>
     </aside>
