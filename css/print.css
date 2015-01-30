@@ -1,0 +1,14 @@
+.post {
+    page-break-after: always;
+}
+.post.panel-default {
+    border: none;
+}
+
+.post .post-meta {
+    text-align: center;
+}
+
+.disqus {
+    display: none !important;
+}
