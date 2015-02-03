@@ -2,7 +2,6 @@
 layout: post
 title: Why do we use only RMDBs?!
 ---
-# Why do we use only RMDBs?!
 
 Well It's aas far as the former issue of figuring out how to get Mac and FreeBSD to play nice together I haven't done anything. I think I'm just gonna install BootCamp, create a small partition to boot freeBSD off of and get it over with.
 

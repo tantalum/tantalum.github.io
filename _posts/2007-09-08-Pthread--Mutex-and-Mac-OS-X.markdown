@@ -2,8 +2,6 @@
 layout: post
 title: Pthread, Mutex and Mac OS X
 ---
-# Pthread, Mutex and Mac OS X
-
 
 A while back I was reading Beginning Linux Programming. I never worked that much with the examples. Partially because I really never had time. So the other day I had some free time and I wanted to see what would and wouldn't work with my Mac. So I open up the part on threading and I re-read the mutex part. A couple of man's later and I found out that Macs supports pthread. I wrote up this little example for mutexes.
 

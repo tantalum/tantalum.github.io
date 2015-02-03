@@ -2,7 +2,6 @@
 layout: post
 title: Continuing the FreeBSD struggle
 ---
-# Continuing the FreeBSD struggle
 
 So I got a freebsd 6.2 CD and popped it in tne mac and it booted up all nice and pretty. The installation was a breeze, freebsd saw both the external hard drive and my wireless card, gentoo didnt see my wireless.
 

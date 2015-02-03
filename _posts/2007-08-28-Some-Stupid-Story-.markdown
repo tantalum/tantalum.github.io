@@ -2,7 +2,6 @@
 layout: post
 title: Some Stupid Story.
 ---
-# Some Stupid Story.
 
 So today wasn't very interesting computer wise.
 

@@ -2,7 +2,6 @@
 layout: post
 title: What Tor Users Connect To
 ---
-# What Tor Users Connect To
 
 The other day I was playing with my Tor node's configuration when I found out that with absolutely no trickery you can get Tor to log some interesting addresses. One of the things Tor logs is the address of edge (aka. exit) connections, which tells you what the node is connecting to but not who the connection is for.
 

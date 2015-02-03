@@ -2,7 +2,6 @@
 layout: post
 title: LAWIM
 ---
-# LAWIM
 
 Gotta love CoreImageFunHouse!
 

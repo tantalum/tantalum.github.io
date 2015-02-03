@@ -2,7 +2,6 @@
 layout: post
 title: Python Link Extractor/tester
 ---
-# Python Link Extractor/tester
 
 Ok so I was going to write a python counter part to yesterdays script. It's kind of funny because the difference between Python and Perl are so big that it's hard to write a good counter part in python.
 

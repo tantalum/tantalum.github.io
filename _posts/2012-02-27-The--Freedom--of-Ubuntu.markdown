@@ -2,7 +2,6 @@
 layout: post
 title: The "Freedom" of Ubuntu
 ---
-# The "Freedom" of Ubuntu
 
 ## The Problem
 

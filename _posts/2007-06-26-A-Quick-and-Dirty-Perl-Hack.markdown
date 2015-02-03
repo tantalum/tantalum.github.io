@@ -2,7 +2,6 @@
 layout: post
 title: A Quick and Dirty Perl Hack
 ---
-# A Quick and Dirty Perl Hack
 
 Well a while back I read a book to learn perl. I have seen perl code before and I, like very one else, have heard about it. I did the standard programming practices (e.g: Remove blank lines) and wrote a couple of utilities that I used to clean up some data I had. But after that I dropped it for about 4 month. Today I was looking a my copy of the Perl Cookbook and started reading the web stuff chapter. I read a couple of recipes and came up with this:
 

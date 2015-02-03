@@ -2,7 +2,6 @@
 layout: post
 title: openFrameworks is cool
 ---
-# openFrameworks is cool
 
 [openFrameworks](http://www.openframeworks.cc/) is a set of C/C++ libraries for "Creative Coding".
 

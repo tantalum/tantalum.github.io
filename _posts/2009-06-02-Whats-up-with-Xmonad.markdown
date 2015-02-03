@@ -2,7 +2,6 @@
 layout: post
 title: Whats up with Xmonad
 ---
-# Whats up with Xmonad
  
   Xomnad... The new and hip tiling window manager written is Haskell, the new hip language. I've been hearing about xmonad a lot and have been trying to get into haskell. Ya know, gotta follow those trends.
 

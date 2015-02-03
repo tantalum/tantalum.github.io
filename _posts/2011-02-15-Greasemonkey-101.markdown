@@ -2,7 +2,6 @@
 layout: post
 title: Greasemonkey 101
 ---
-# Greasemonkey 101
 
 So I'm reading [InfoWorld](http://www.infoworld.com) the other day and on the side of the page ther is that annoying "Share This" toolbar. Now I have AdBlock installed but it skipped this one for some reason and AdBlock can't removes div's AFAIK. The solution I came up with was [Greasemonkey](http://www.greasespot.net/)
 

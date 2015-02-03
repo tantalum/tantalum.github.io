@@ -2,7 +2,6 @@
 layout: post
 title: Designer
 ---
-# Designer
 
 QtDesigner + Python + Mac = Some really cool shit
 
