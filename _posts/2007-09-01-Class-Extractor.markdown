@@ -5,6 +5,8 @@ title: Class Extractor
 
 Ok so I wanted to do a little something in perl because it's been a while since I've written anything in it. Since I still have the code from my myspace profile I decided to write a little script to extract the css classes from it. Well here it is:
 
+<!--more-->
+
 ```perl
 #use strict ;
 use HTML::Parser ;

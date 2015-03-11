@@ -5,6 +5,8 @@ title: Greasemonkey 101
 
 So I'm reading [InfoWorld](http://www.infoworld.com) the other day and on the side of the page ther is that annoying "Share This" toolbar. Now I have AdBlock installed but it skipped this one for some reason and AdBlock can't removes div's AFAIK. The solution I came up with was [Greasemonkey](http://www.greasespot.net/)
 
+<!--more-->
+
 After [installing the plugin](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) go back to that article you were reading. Right click on the Greasemonkey icon on the right side of Firefox's status bar and choose to add a new script. Fill out the Dialog that pop's up (see screenshot), make sure to give an URL for the namespace, a fake one will do, and to set the include line to "http://www.infoworld.com/*".
 
 ![GreaseMonkey](http://farm6.static.flickr.com/5218/5449967798_b57deb0219.jpg)

@@ -11,6 +11,8 @@ I heard about openFrameworks a while back off of reddit. The video on there home
 
 It only took me 100-150 lines of code to write that app. You can get the Xcode project [here](http://github.com/tantalum/ofvideograbber/tree/master).
 
+<!--more-->
+
 IMO the filter looks best with some kind of light source in the background and an object between it and the camera. It's trippy!
 
 So what really happened was that I was trying to write an edge detector and it went wrong. See code for a link, since I obviously have know idea what I'm doing, I won't try to explain why the filter does what it does. But I thought it was cool so I left it the way it is.

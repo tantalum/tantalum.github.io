@@ -7,6 +7,8 @@ The other day I was playing with my Tor node's configuration when I found out th
 
 Naturally it would be interesting to know what other people are using Tor for, so I kept a couple of days worth of logs and wrote this little perl script to parse them out for me.
 
+<!--more-->
+
 ```perl
 #!/usr/bin/env perl
 

@@ -7,6 +7,8 @@ Ok so I was going to write a python counter part to yesterdays script. It's kind
 
 For starters python doesnt have a HTML::LinkExtor module so I have to write my own link extractor which isn't hard. It's actually kind of easy. But it's also somethig I didn't have to do in perl.
 
+<!--more-->
+
 Another difference is that python has urllib and urllib2 instead of the LWP::* packages. You can get the same results using both packages but the method is a little different.
 
 Also I cant find a package to guess the correct url from a partial url in python (think URI::Heurostic) so I have to write the whole url on the command line in the python version... Some thing I didn't have to do with perl

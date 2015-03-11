@@ -8,6 +8,8 @@ catagories: scala markovchain
 
 A Markov Chain is a set of transitions from one state to the next; Such that the transition from the current state to the next depends only on the current state, the previous and future states do not effect the probability of the transition. A transitions independence from future and past sates is called the Markov Property. What we are going to do is explore Markov Chains through a little story and some code.
 
+<!--more-->
+
 ## The Story of Mark
 
 The best way to understand Markov Chains, IMO, is to use a simple example. Lets take an average Joe.. We'll call him Mark. One week we decide to watch Mark to see what he does and we come up with this:

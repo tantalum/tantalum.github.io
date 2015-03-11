@@ -9,6 +9,8 @@ I've been running Ubuntu as my main OS for pretty much a couple of years now and
 
 This past summer I moved back to Syria, where, as you all know, the US has restricted the imports on software products for "National Security" reasons. So I've gotten used to Google Code being blocked, SourceForge not letting me download stuff and all that jazz. Still Ubuntu worked like a champ and I could download anything I wanted from the repos. That was until I decided to update my system to 11.04.
 
+<!--more-->
+
 After spending about 16 hours downloading the updates (Slow internet over here), I was greeted with this little error:
 
 ```

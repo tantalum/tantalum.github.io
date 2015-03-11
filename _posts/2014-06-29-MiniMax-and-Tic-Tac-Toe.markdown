@@ -11,6 +11,8 @@ A zero-sum game is a game where, if one player loses, than another player must w
 
 Depth-first search means that we follow the algorithm all the way down until the end, and then start moving backwards, looking for the best move as we go. The reason why we have to follow the algorithm all the way to the end will become clear soon.
 
+<!--more-->
+
 ## How it works
 
 Now that we understand some of the techno-babble, lets start talking about how Minimax works. Minimax is based on the assumption that your opponent will make the move that will maximize his/her/its potential score, thus minimizing your potential score (zero-sum, remember) and you want to do the same to your opponent.

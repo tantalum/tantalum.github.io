@@ -4,7 +4,8 @@ title: Sooooooooooo True
 ---
 
 >  It sure seems easy to make a table. Anyone can do it, right? Get 1 large flat rectangular piece of wood, 4 equally tall wooden poles, 4 nails and a hammer. Nail the 4 poles to each corner of the flat rectangular bit, and you have a table. Ta daaa!
-    
+
+<!--more-->    
 >  Now ask a carpenter to craft you a table. First they will spend time discussing the purpose and function of the table - indoor or outdoor, kitchen or dining room, for show or heavy use, what load does it need to bear. Then they will determine the materials to use - hard vs soft woods, laminate, plywood or railway sleepers. Then they will look at the aesthetics of the table - beveled edges, foot design, center or corner mounted legs. And when they finally get down to crafting the table, they spend a lot of time to mitre, mortise and dovetail all joints, install bracing points, use quality glues, dowels and screws, test its levelness, sand it flat, stain it, seal it, polish it and produce a table they are proud of. Seems a whole bunch more work, doesn't it? It just a table, no?
         
 >  But there are differences between the two approaches, did you see any?

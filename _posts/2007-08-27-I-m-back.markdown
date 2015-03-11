@@ -5,6 +5,8 @@ title: I'm back
 
 Ok I know it's been a while since I've posted anything here but I kinda went to Syria then I ended up moving to Columbia, Missouri. I'm still not settled in and stuff is still crazy.... The last month/two months have been really crazy.
 
+<!--more-->
+
 Any way back to whats important. I set up a mySpace page (Shudder!!) and the default look for the profile is kinda dull so I decided to spice it up a little bit using CSS... Well if you've never looked at the source for your myspace profile, Dont! That is some fucked up code. But I decided that I should try and analyze it so I could add some bitchin css to my ultra cool myspace page.
 
 First off I started to read a little bit of it and try to figure out how it was organized. Every time I'd hit an Id or class tag I would make a note of it in my little TextMate window. Here are the notes:

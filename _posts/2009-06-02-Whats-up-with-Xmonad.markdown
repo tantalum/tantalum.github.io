@@ -7,6 +7,8 @@ title: Whats up with Xmonad
 
 So I go and grab a copy of xomand (0.8) and all the depends (I had haskell setup already). Compiling and installing was a breeze. At the time I had a pimped out gnome setup (compiz, emerald... the works). Just to see what would happen I run the fresh new binary called xmonad. All the friking windows start bouncing around the screen. It was kind of cool to see the two programs fight for control over to poor windows.
 
+<!--more-->
+
 Getting used to the tiling thing took a little bit. I'm still working on getting used to it, but I haven't lost much as far as productivity. Configuring xmonad is pretty fun since you have all of haskell to mess around with. But if you just want to do some simple configuration it still feels like any other config file (terminal = "urxvt").
 
 One of the cool things about xmonad is that it's still small enough that you can mess around with it without having to spend a week reading up on documentation (I'm looking at you  [developer.apple.com](http://developer.apple.com/)). There are bunch of pre-made config files that are easy to read, a good starting point.

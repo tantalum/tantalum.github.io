@@ -5,6 +5,8 @@ title: Script is working
 
 So I've been messing around with Mac development for the last little while. I got a copy of "Beginning Mac OS X Programming" and I'm reading it. I also got my iCal script to work, here it is
 
+<!--more-->
+
 ```
 tell application "iCal"
  activate
