@@ -2,8 +2,37 @@ body {
     background: url('/img/symphony.png')
 }
 
-.post-content {
-    padding-left: 1em;
+.post {
+    background: #fff;
+    padding: 1em;
+    margin-bottom: 4em;
+}
+
+.post .post-meta {
+    text-align: center;
+}
+
+.post .post-meta a {
+    color: #000;
+}
+
+.post .post-meta .post-meta-title {
+    font-family: Times;
+}
+
+.post .post-meta a:hover {
+    text-decoration: none;
+    color: #428BCA;
+}
+
+.post .post-meta a:focus {
+    text-decoration: none;
+    color: #428BCA;
+}
+
+.post .post-meta .post-meta-date {
+    font-style: italic;
+    color: #aaa;
 }
 
 blockquote {
@@ -11,6 +40,10 @@ blockquote {
 }
 
 .highlight pre {
-    font-size: 0.5em;
+    font-size: 1em;
     font-weight: normal;
+}
+
+.disqus {
+    background: #fff;
 }
