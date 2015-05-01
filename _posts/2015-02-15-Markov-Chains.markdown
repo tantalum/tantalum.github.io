@@ -166,8 +166,7 @@ object MarkovChainGrapher {
 }
 ```
 
-
-## Watching Your Packets
+<h2>Watching Your Packets</h2>
 
 Now that we have a Markov Chain, we need to do something with it. Markov Chains are used in almost everything from speech recognition to games. One easy task to do with Markov Chains is to trace packets through the internet to generate a map of where your packets go and how they reach their destination.
 
