@@ -2,7 +2,7 @@ name: Circuits Of Imagination
 description: Thoughts about computers, programming, the net and the world.
 url: http://blog.circuitsofimagination.com
 markdown: redcarpet
-highlighter: rouge
+highlighter: pygments
 safe: true
 lsi: false
 paginate: 5
