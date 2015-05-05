@@ -1,5 +1,6 @@
 body {
-    background: url('/img/symphony.png')
+    background: url('/img/symphony.png');
+	background-attachment: fixed;
 }
 
 .post {
