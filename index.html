@@ -4,27 +4,39 @@ title: Circuits Of Imagination Blog
 ---
 
 {% for post in paginator.posts %}
-<section class="post container-fluid">
+<section class="post">
     <div class="post-meta">
         <a href="{{ post.url }}"><h1 class="post-meta-title">{{ post.title }}</h1></a>
 	      <p class="post-meta-date">{{ post.date | date_to_string }}</p>
     </div>
-    <hr class="content-seperator"/>
-    <div class="post-content">
+    <div class="post-content container-fluid">
 	      {{ post.excerpt }}
     </div>
 </section>
 {% endfor %}
 
-<div class="paginator">
-    {% if paginator.previous_page %}
-    <a href="/page{{ paginator.previous_page }}" class="previous pull-left"><- Previous</a>
-    {% else %}
-    <span class="previous">Previous</span>
-    {% endif %}
-    {% if paginator.next_page %}
-    <a href="/page{{ paginator.next_page }}" class="next pull-right">Next -></a>
-    {% else %}
-    <span class="next ">Next</span>
-    {% endif %}
+<div class="paginator-bar">
+	<div class="container-fluid">
+		<ul class="pager">
+			{% if paginator.previous_page %}
+			<li class="previous">
+				<a href="/page{{ paginator.previous_page }}"><i class="fa fa-arrow-left"></i> Previous</a>
+			</li>
+			{% else %}
+			<li class="previous disabled">
+				<span>Previous</span>
+			</li>
+			{% endif %}
+
+			{% if paginator.next_page %}
+			<li class="next">
+				<a href="/page{{ paginator.next_page }}">Next <i class="fa fa-arrow-right"></i></a>
+			</li>
+			{% else %}
+			<li class="next disbaled">
+				<span>Next</span>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
 </div>

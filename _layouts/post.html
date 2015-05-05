@@ -1,13 +1,12 @@
 ---
 layout: default
 ---
-<section class="post container-fluid">
+<section class="post">
   <div class="post-meta">
     <a href="{{ page.url }}"><h1 class="post-meta-title">{{ page.title }}</h1></a>
     <p class="post-meta-date">{{ page.date | date_to_string }}</p>
   </div>
-  <hr class="content-seperator"/>
-  <div class="post-content">
+  <div class="post-content container-fluid">
     {{ content }}
   </div>
 </section>

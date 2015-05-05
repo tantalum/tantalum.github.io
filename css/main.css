@@ -5,36 +5,31 @@ body {
 
 .post {
     background: #fff;
-    padding: 1em;
     margin-bottom: 4em;
-	box-shadow: 1em 0.5em 0.5em #AAA;
+	box-shadow: 0em 0em 1em #AAA;
 }
 
 .post .post-meta {
     text-align: center;
+	padding: 1em 0;
 }
 
 .post .post-meta a {
     color: #000;
 }
 
-.post .post-meta .post-meta-title {
-    font-family: Times;
-}
-
-.post .post-meta a:hover {
-    text-decoration: none;
-    color: #428BCA;
-}
-
-.post .post-meta a:focus {
-    text-decoration: none;
-    color: #428BCA;
-}
-
 .post .post-meta .post-meta-date {
     font-style: italic;
     color: #aaa;
+}
+
+.post .post-content {
+	padding-bottom: 3em;
+}
+
+.post .post-content img {
+	max-width: 100%;
+	height: auto;
 }
 
 blockquote {
