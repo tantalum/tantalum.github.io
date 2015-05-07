@@ -1,6 +1,7 @@
 .post {
     page-break-after: always;
 }
+
 .post.panel-default {
     border: none;
 }
@@ -11,4 +12,8 @@
 
 .disqus {
     display: none !important;
+}
+
+.paginator-bar {
+	display: none;
 }
