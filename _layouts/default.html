@@ -29,8 +29,6 @@
         <link rel="alternate" type="application/rss+xml" title="CircuitsOfImagination RSS Feed" href="/feed.xml">
 
         <!-- OpenGraph data -->
-        <meta property="og:title" content="{{ page.title }}" />
-        <meta property="og:url"   content="{{ page.url | canonical }}" />
         {% if page.path == 'index.html' %}
         <meta property="og:type" content="website" />
         {% else %}
@@ -39,6 +37,8 @@
         <meta property="og:article:section" content="Technology" />
         <meta property="og:article:published_time" content="{{ page.date }}" />
         {% endif %}
+        <meta property="og:title" content="{{ page.title }}" />
+        <meta property="og:url"   content="{{ page.url | canonical }}" />
 
     </head>
     <body>
