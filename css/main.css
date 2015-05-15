@@ -10,6 +10,7 @@ body {
 }
 
 .post .post-meta {
+    background: url("/img/dark_embroidery.png");
     text-align: center;
 	padding: 1em 0;
 }
@@ -17,8 +18,7 @@ body {
 .post .post-meta a {
 	font-family: "Verdana", sans-serif;
 	font-weight: bold;
-    color: #000;
-	text-shadow: 0.1em 0.1em 0.2em #aaa;
+    color: #FFF;
 }
 
 .post .post-meta .post-meta-date {
