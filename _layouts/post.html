@@ -6,6 +6,27 @@ layout: default
     <a href="{{ page.url }}"><h1 class="post-meta-title">{{ page.title }}</h1></a>
     <p class="post-meta-date">{{ page.date | date_to_string }}</p>
   </div>
+
+  <div class="post-social">
+    <ul class="social-buttons">
+        <li> <!-- Twitter Share -->
+          <a href="https://twitter.com/intent/tweet?text={{ page.title | cgi_escape }}&via=blit32&url={{ site.url | append: page.url | cgi_escape }}" target="_blank">
+            <i class="fa fa-2x fa-twitter"></i>
+          </a>
+        </li>
+        <li> <!-- Reddit Share -->
+          <a href="https://www.reddit.com/submit?url={{ site.url | append: page.url | cgi_escape }}" target="_blank">
+            <i class="fa fa-2x fa-reddit"></i>
+          </a>
+        </li>  
+        <li> <!-- Tumblr Share -->
+          <a href="https://www.tumblr.com/widgets/share/tool?content={{ site.url | append: page.url |cgi_escape }}&title={{ page.title | cgi_escape }}" target="_blank">
+            <i class="fa fa-2x fa-tumblr"></i>
+          </a>
+        </li>  
+    </ul>
+  </div>
+
   <div class="post-content container-fluid">
     {{ content }}
   </div>
