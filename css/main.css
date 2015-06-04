@@ -3,6 +3,42 @@ body {
 	background-attachment: fixed;
 }
 
+.main-nav {
+    background: url('/img/dark_embroidery.png');
+    margin-bottom: 1em;
+    box-shadow: 0em 0em 1em #AAA;
+}    
+
+.main-nav a {
+    color: #fff;
+}
+
+.main-nav .nav-home {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.main-nav .nav-home a:hover {
+    text-decoration: none;
+}
+
+.main-nav .nav-home a:focus {
+    text-decoration: none;
+}
+
+.main-nav ul.nav-links {
+    list-style: none;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.main-nav ul.nav-links li {
+    display: inline-block;
+    padding: 1em;
+}    
+
 .post {
     background: #fff;
     margin-bottom: 4em;
