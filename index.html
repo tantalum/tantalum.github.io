@@ -3,6 +3,11 @@ layout: default
 title: Circuits Of Imagination Blog
 ---
 
+<header class="about">
+    <h1>Circuits Of Imagination</h1>
+    <p>Thoughts on AI, programming, open source and the world</p>
+</header>
+
 {% for post in paginator.posts %}
 <section class="post">
     <div class="post-meta">
@@ -15,7 +20,7 @@ title: Circuits Of Imagination Blog
 </section>
 {% endfor %}
 
-<div class="paginator-bar">
+<footer class="paginator-bar">
 	<div class="container-fluid">
 		<ul class="pager">
 			{% if paginator.previous_page %}
@@ -39,4 +44,4 @@ title: Circuits Of Imagination Blog
 			{% endif %}
 		</ul>
 	</div>
-</div>
+</footer>

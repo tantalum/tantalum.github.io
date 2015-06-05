@@ -3,6 +3,10 @@ body {
 	background-attachment: fixed;
 }
 
+/* -------------------------------------------------------------------------
+NAVIGATION BAR
+-------------------------------------------------------------------------- */
+
 .main-nav {
     background #454D57;
     background: linear-gradient(0deg, #484F5A, #647083);
@@ -39,7 +43,24 @@ body {
 .main-nav ul.nav-links li {
     display: inline-block;
     padding: 1em;
-}    
+}
+
+/* ----------------------------------------------------------------------------
+ABOUT SECTION
+------------------------------------------------------------------------------- */
+
+.about {
+    background: rgb(170,170,170); 
+    background: linear-gradient(to bottom, rgba(170,170,170,0.50) 0%,rgba(221,221,221,0.50) 100%);
+    margin: 2em;
+    padding: 1em;
+    border-radius: 1em;
+    text-align: center;
+}
+
+/* ------------------------------------------------------------------
+POSTS
+-------------------------------------------------------------------- */
 
 .post {
     background: #fff;
