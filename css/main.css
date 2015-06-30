@@ -8,29 +8,17 @@ NAVIGATION BAR
 -------------------------------------------------------------------------- */
 
 .main-nav {
-    background #454D57;
-    background: linear-gradient(0deg, #484F5A, #647083);
     margin-bottom: 1em;
-    box-shadow: 0em 0em 1em #AAA;
-    border-radius: 0em 0em 0.5em 0.5em;
 }    
 
 .main-nav a {
-    color: #fff;
+    color: #000;
 }
 
 .main-nav .nav-home {
     text-align: center;
     font-size: 2em;
     font-weight: bold;
-}
-
-.main-nav .nav-home a:hover {
-    text-decoration: none;
-}
-
-.main-nav .nav-home a:focus {
-    text-decoration: none;
 }
 
 .main-nav ul.nav-links {
@@ -66,14 +54,12 @@ POSTS
     background: #fff;
     margin-bottom: 4em;
 	box-shadow: 0em 0em 1em #AAA;
-    border-radius: 0.5em;
 }
 
 .post .post-meta {
     background: url("/img/random_grey_variations.png");
     text-align: center;
 	padding: 1em 0;
-    border-radius: 0.5em 0.5em 0em 0em;
 }
 
 .post .post-meta a {
@@ -103,7 +89,6 @@ POSTS
 
 .post .post-content {
 	padding-bottom: 3em;
-    border-radius: 0em 0em 0.5em 0.5em;
 }
 
 .post .post-content img {
