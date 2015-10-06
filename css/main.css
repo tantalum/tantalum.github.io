@@ -1,6 +1,6 @@
 body {
     background: url('/img/symphony.png');
-	background-attachment: fixed;
+    background-attachment: fixed;
 }
 
 /* -------------------------------------------------------------------------
@@ -9,10 +9,13 @@ NAVIGATION BAR
 
 .main-nav {
     margin-bottom: 1em;
+    background: url("/img/random_grey_variations.png");
+    box-shadow: 0em 0em 1em #AAA;
+    border-bottom: solid #000 1px;
 }    
 
 .main-nav a {
-    color: #000;
+    color: #fff;
 }
 
 .main-nav .nav-home {
