@@ -41,12 +41,13 @@
         <meta property="og:url"   content="{{ page.url | canonical }}" />
 
         <!-- Twitter Cards -->
-        {% if page.path != "index.html" %}
+        {% if page.path != 'index.html' %}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@blit32" />
         <meta name="twitter:title" content="{{ page.title }}" />
         <meta name="twitter:description" content="{{ page.excerpt }}" />
-        
+        {% endif %}
+
     </head>
     <body>
         <!-- Top Bar -->
