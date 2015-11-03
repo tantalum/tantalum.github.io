@@ -9,12 +9,12 @@ title: Circuits Of Imagination Blog
 </header>
 
 {% for post in paginator.posts %}
-<section class="post">
-    <div class="post-meta">
+<section class="post row">
+    <div class="post-meta col-xs-12">
         <a href="{{ post.url }}"><h1 class="post-meta-title">{{ post.title }}</h1></a>
 	      <p class="post-meta-date">{{ post.date | date_to_string }}</p>
     </div>
-    <div class="post-content container-fluid">
+    <div class="post-content col-xs-12">
 	      {{ post.excerpt }}
     </div>
 </section>

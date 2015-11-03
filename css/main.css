@@ -1,6 +1,13 @@
 body {
     background: url('/img/symphony.png');
     background-attachment: fixed;
+    padding-top: 50px;
+}
+
+@media (max-width: 750px) {
+    body {
+        padding-top: 89px;
+    }
 }
 
 /* -------------------------------------------------------------------------
@@ -8,10 +15,10 @@ NAVIGATION BAR
 -------------------------------------------------------------------------- */
 
 .main-nav {
-    margin-bottom: 1em;
     background: url("/img/random_grey_variations.png");
-    box-shadow: 0em 0em 1em #AAA;
     border-bottom: solid #000 1px;
+    margin: 0px;
+    border-radius: 0;
 }    
 
 .main-nav a {
@@ -50,13 +57,19 @@ ABOUT SECTION
 }
 
 /* ------------------------------------------------------------------
+MAIN CONTAINER
+---------------------------------------------------------------------*/
+.main-content {
+    background: #fff;
+    box-shadow: 0em 1em 1em #AAA;    
+}
+/* ------------------------------------------------------------------
 POSTS
 -------------------------------------------------------------------- */
 
 .post {
     background: #fff;
     margin-bottom: 4em;
-	box-shadow: 0em 0em 1em #AAA;
 }
 
 .post .post-meta {
