@@ -94,13 +94,11 @@ POSTS
 .post-social ul {
     list-style: none;
     text-align: right;
-    margin: 0 1em;
-    padding: 0px 1em;
 }
 
 .post-social li {
     display: inline-block;
-    margin: 0.25em 0.5em;
+    margin: 0.25em 0em;
 }
 
 .post .post-content {

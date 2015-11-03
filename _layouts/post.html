@@ -8,20 +8,29 @@ layout: default
   </div>
 
   <div class="post-social col-xs-12">
-    <ul class="social-buttons row">
+    <ul class="social-buttons">
         <li> <!-- Twitter Share -->
           <a href="https://twitter.com/intent/tweet?text={{ page.title | cgi_escape }}&via=blit32&url={{ site.url | append: page.url | cgi_escape }}" target="_blank">
-            <i class="fa fa-2x fa-twitter"></i>
+            <span class="fa-stack fa-1x">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+            </span>
           </a>
         </li>
         <li> <!-- Reddit Share -->
           <a href="https://www.reddit.com/submit?url={{ site.url | append: page.url | cgi_escape }}" target="_blank">
-            <i class="fa fa-2x fa-reddit"></i>
+            <span class="fa-stack fa-1x">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-reddit fa-stack-1x fa-inverse"></i>
+            </span>
           </a>
         </li>  
         <li> <!-- Tumblr Share -->
           <a href="https://www.tumblr.com/widgets/share/tool?content={{ site.url | append: page.url |cgi_escape }}&title={{ page.title | cgi_escape }}" target="_blank">
-            <i class="fa fa-2x fa-tumblr"></i>
+            <span class="fa-stack fa-1x">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-tumblr fa-stack-1x fa-inverse"></i>
+            </span>
           </a>
         </li>  
     </ul>
