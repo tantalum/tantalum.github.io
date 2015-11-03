@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Markov Chains"
-categories: scala markovchain
 ---
 
 ## Introduction
