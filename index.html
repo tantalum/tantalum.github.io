@@ -3,20 +3,19 @@ layout: default
 title: Circuits Of Imagination Blog
 ---
 
-<header class="about">
-    <h1>Circuits Of Imagination</h1>
-    <p>Thoughts on AI, programming, open source and the world</p>
-</header>
-
 {% for post in paginator.posts %}
-<section class="post row">
-    <div class="post-meta col-xs-12">
-        <a href="{{ post.url }}"><h1 class="post-meta-title">{{ post.title }}</h1></a>
-	      <p class="post-meta-date">{{ post.date | date_to_string }}</p>
+<section class="coi-post-card mdl-card mdl-shadow--2dp">
+  <div class="coi-post-card-title mdl-card__title  mdl-card--border">
+    <h1 class="coi-post-card-title-text mdl-card__title-text">
+      {{ post.title }}
+    </h1>
+    <div class="coi-post-card-subtitle mdl-card__subtitle-text">
+      {{ post.date | date_to_string }}
     </div>
-    <div class="post-content col-xs-12">
-	      {{ post.excerpt }}
-    </div>
+  </div>
+  <div class="coi-post-card-preview  mdl-card__supporting-text">
+    {{ post.excerpt }}
+  </div>
 </section>
 {% endfor %}
 
