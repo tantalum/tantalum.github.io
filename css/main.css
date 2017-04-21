@@ -1,3 +1,7 @@
+body {
+  background: url('/img/symphony.png');
+}
+
 /*-------------------------------------------------------------------
 PAGE HEADER
 ---------------------------------------------------------------------*/
@@ -22,6 +26,10 @@ POSTS CARDS
   color: white;
 }
 
+.coi-post-card .coi-post-card-title .coi-post-card-title-link {
+  color: #fff;
+}
+
 .coi-post-card .coi-post-card-title-text {
   width: 75%;
 }
@@ -29,4 +37,5 @@ POSTS CARDS
 .coi-post-card .coi-post-card-subtitle {
   width: 25%;
   text-align: right;
+  color: #fff;
 }

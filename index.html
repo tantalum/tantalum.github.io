@@ -7,7 +7,7 @@ title: Circuits Of Imagination Blog
 <section class="coi-post-card mdl-card mdl-shadow--2dp">
   <div class="coi-post-card-title mdl-card__title  mdl-card--border">
     <h1 class="coi-post-card-title-text mdl-card__title-text">
-      {{ post.title }}
+      <a class="coi-post-card-title-link" href="{{ post.url }}">{{ post.title }}</a>
     </h1>
     <div class="coi-post-card-subtitle mdl-card__subtitle-text">
       {{ post.date | date_to_string }}
@@ -20,27 +20,17 @@ title: Circuits Of Imagination Blog
 {% endfor %}
 
 <div class="paginator-bar">
-	<div class="container-fluid">
-		<ul class="pager">
-			{% if paginator.previous_page %}
-			<li class="previous">
-				<a href="{{ paginator.previous_page_path }}"><i class="fa fa-arrow-left"></i> Previous</a>
-			</li>
-			{% else %}
-			<li class="previous disabled">
-				<span>Previous</span>
-			</li>
-			{% endif %}
+  <div class="mdl-grid">
+    {% if paginator.previous_page %}
+    <div class="mdl-cell previous">
+      <a href="{{ paginator.previous_page_path }}"><i class="fa fa-arrow-left"></i> Previous</a>
+    </div>
+    {% endif %}
 
-			{% if paginator.next_page %}
-			<li class="next">
-				<a href="{{ paginator.next_page_path }}">Next <i class="fa fa-arrow-right"></i></a>
-			</li>
-			{% else %}
-			<li class="next disbaled">
-				<span>Next</span>
-			</li>
-			{% endif %}
-		</ul>
-	</div>
+    {% if paginator.next_page %}
+    <div class="mdl-cell next">
+      <a href="{{ paginator.next_page_path }}">Next <i class="fa fa-arrow-right"></i></a>
+    </div>
+    {% endif %}
+  </div>
 </div>
