@@ -24,7 +24,7 @@ title: Circuits Of Imagination Blog
 		<ul class="pager">
 			{% if paginator.previous_page %}
 			<li class="previous">
-				<a href="/page{{ paginator.previous_page }}"><i class="fa fa-arrow-left"></i> Previous</a>
+				<a href="{{ paginator.previous_page_path }}"><i class="fa fa-arrow-left"></i> Previous</a>
 			</li>
 			{% else %}
 			<li class="previous disabled">
@@ -34,7 +34,7 @@ title: Circuits Of Imagination Blog
 
 			{% if paginator.next_page %}
 			<li class="next">
-				<a href="/page{{ paginator.next_page }}">Next <i class="fa fa-arrow-right"></i></a>
+				<a href="{{ paginator.next_page_path }}">Next <i class="fa fa-arrow-right"></i></a>
 			</li>
 			{% else %}
 			<li class="next disbaled">
