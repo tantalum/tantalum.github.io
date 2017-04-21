@@ -55,3 +55,46 @@ PAGINATOR
 .coi-paginator-bar .coi-paginator-next {
   text-align: right;
 }
+
+/*----------------------------------------------------------------------
+FULL POST
+----------------------------------------------------------------------- */
+.coi-post {
+  background: #fff;
+  margin: auto 1em;
+}
+
+.coi-post .coi-post-header {
+  background: rgb(63,81,181);
+  color: #fff;
+  padding: 1em;
+}
+
+.coi-post .coi-post-content {
+  padding: 1em;
+}
+
+.coi-post .coi-post-social-buttons {
+    text-align: right;
+    padding: 0.5em 1em;
+}
+
+.coi-post .coi-post-social-buttons .coi-post-social-button {
+  display: inline-block;
+}
+
+.coi-disqus {
+  background: #fff;
+  margin: 1em;
+  padding: 0.5em;
+}
+
+/* -----------------------------------------------------------------------
+CODE HIGHLIGH
+-------------------------------------------------------------------------- */
+.highlight {
+  border: solid black 1px;
+  border-radius: 0.25em;
+  padding: 0px 0.5em;
+  overflow-x: scroll;
+}
