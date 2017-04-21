@@ -19,18 +19,22 @@ title: Circuits Of Imagination Blog
 </section>
 {% endfor %}
 
-<div class="paginator-bar">
-  <div class="mdl-grid">
+<div class="coi-paginator-bar mdl-grid">
     {% if paginator.previous_page %}
-    <div class="mdl-cell previous">
-      <a href="{{ paginator.previous_page_path }}"><i class="fa fa-arrow-left"></i> Previous</a>
+    <div class="mdl-cell mdl-cell--6-col coi-paginator-previous">
+      <a href="{{ paginator.previous_page_path }}" class="mdl-button mdl-js-button coi-paginator-button coi-paginator-link">
+        <i class="fa fa-arrow-left"></i> Previous
+      </a>
     </div>
+    {% else %}
+    <div class="mdl-cell mdl-cell--6-col coi-paginator-placeholder"></div>
     {% endif %}
 
     {% if paginator.next_page %}
-    <div class="mdl-cell next">
-      <a href="{{ paginator.next_page_path }}">Next <i class="fa fa-arrow-right"></i></a>
+    <div class="mdl-cell mdl-cell--6-col coi-paginator-button  coi-paginator-next">
+      <a href="{{ paginator.next_page_path }}" class="mdl-button mdl-js-button coi-paginator-button coi-paginator-link">
+        Next <i class="fa fa-arrow-right"></i>
+      </a>
     </div>
     {% endif %}
-  </div>
 </div>
