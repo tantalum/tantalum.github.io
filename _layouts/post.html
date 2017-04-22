@@ -1,46 +1,45 @@
 ---
 layout: default
 ---
-<section class="post row">
-  <div class="post-meta col-xs-12">
-    <a href="{{ page.url }}"><h1 class="post-meta-title">{{ page.title }}</h1></a>
-    <p class="post-meta-date">{{ page.date | date_to_string }}</p>
+<section class="coi-post mdl-shadow--2dp">
+  <div class="coi-post-header mdl-grid">
+    <h1 class="coi-post-header-title mdl-cell mdl-cell--10-col mdl-cell--12-col-phone">{{ page.title }}</h1>
+    <p class="coi-post-header-date mdl-cell mdl-cell--2-col mdl-cell--12-col-phone mdl-cell--bottom">{{ page.date | date_to_string }}</p>
   </div>
 
-  <div class="post-social col-xs-12">
-    <ul class="social-buttons">
-        <li> <!-- Twitter Share -->
-          <a href="https://twitter.com/intent/tweet?text={{ page.title | cgi_escape }}&via=blit32&url={{ site.url | append: page.url | cgi_escape }}" target="_blank">
-            <span class="fa-stack fa-1x">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-            </span>
-          </a>
-        </li>
-        <li> <!-- Reddit Share -->
-          <a href="https://www.reddit.com/submit?url={{ site.url | append: page.url | cgi_escape }}" target="_blank">
-            <span class="fa-stack fa-1x">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-reddit fa-stack-1x fa-inverse"></i>
-            </span>
-          </a>
-        </li>  
-        <li> <!-- Tumblr Share -->
-          <a href="https://www.tumblr.com/widgets/share/tool?content={{ site.url | append: page.url |cgi_escape }}&title={{ page.title | cgi_escape }}" target="_blank">
-            <span class="fa-stack fa-1x">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-tumblr fa-stack-1x fa-inverse"></i>
-            </span>
-          </a>
-        </li>  
-    </ul>
+  <div class="coi-post-social-buttons">
+      <div class="coi-post-social-button"> <!-- Twitter Share -->
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | cgi_escape }}&via=blit32&url={{ site.url | append: page.url | cgi_escape }}" target="_blank">
+          <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </div>
+      <div class="coi-post-social-button"> <!-- Reddit Share -->
+        <a href="https://www.reddit.com/submit?url={{ site.url | append: page.url | cgi_escape }}" target="_blank">
+          <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-reddit fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </div>
+      <div class="coi-post-social-button"> <!-- Tumblr Share -->
+        <a href="https://www.tumblr.com/widgets/share/tool?content={{ site.url | append: page.url |cgi_escape }}&title={{ page.title | cgi_escape }}" target="_blank">
+          <span class="fa-stack fa-1x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-tumblr fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </div>
   </div>
 
-  <div class="post-content col-xs-12">
+  <div class="coi-post-content">
     {{ content }}
   </div>
 </section>
-<div class="disqus">
+
+<div class="disqus coi-disqus mdl-shadow--2dp">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
