@@ -1,10 +1,14 @@
 name: Circuits Of Imagination
 description: Thoughts about computers, programming, the net and the world.
 url: http://blog.circuitsofimagination.com
-markdown: redcarpet
-highlighter: pygments
-safe: true
-lsi: false
-paginate: 5
-paginate_path: "page:num"
+markdown: kramdown
+highlighter: rouge
+safe: true  
 excerpt_separator: "<!--more-->"
+paginate: 5
+paginate_path: "page:num"  
+gems:
+  - jekyll-paginate
+exclude:
+  - Gemfile
+  - Gemfile.lock  
