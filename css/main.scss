@@ -1,0 +1,91 @@
+---
+# Front matter so Jekyll will process this file
+---
+
+// COLORS
+$coi-dark-gray: #202020;
+$coi-light-gray: #515151;
+$coi-off-white: #767676;
+$coi-white: #fff;
+
+// DIMENSIONS
+$coi-simple-padding: 0.5em;
+
+body {
+  margin: 0px;
+  color: $coi-light-gray;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.coi-navigation {
+  background: $coi-dark-gray;
+  color: $coi-white;
+  padding: $coi-simple-padding;
+
+  a {
+    color: $coi-white;
+    text-decoration: none;
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .coi-header-title {
+    font-size: 5em;
+  }
+}
+
+.coi-main {
+  padding: 0px $coi-simple-padding;
+
+  //------ Post Listing on Main Page ----
+  .coi-post-card {
+    border-bottom: solid $coi-off-white 1px;
+    .coi-post-card-title-container {
+      .coi-post-card-title {
+        margin-bottom: 0px;
+        a.coi-post-card-title-link {
+          color: $coi-dark-gray;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .coi-post-card-subtitle {
+        color: $coi-off-white;
+      }
+    }
+  }
+
+  //---- Full Post ---
+  .coi-post {
+    .coi-post-header {
+      .coi-post-header-title {
+        color: $coi-dark-gray;
+        margin-bottom: 0px;
+      }
+      .coi-post-header-date {
+        color: $coi-off-white;
+        float: left;
+      }
+      .coi-post-social-buttons {
+        text-align: right;
+        float: right;
+        .coi-post-social-button {
+          display: inline-block;
+          a {
+            color: $coi-off-white;
+          }
+        }
+      }
+      &:after {
+        //Clearfix
+        content: "";
+        clear: both;
+        display: table;
+      }
+    }
+  }
+}

@@ -4,35 +4,35 @@ title: Circuits Of Imagination Blog
 ---
 
 {% for post in paginator.posts %}
-<section class="coi-post-card mdl-card mdl-shadow--2dp">
-  <div class="coi-post-card-title mdl-card__title  mdl-card--border">
-    <h1 class="coi-post-card-title-text mdl-card__title-text">
+<section class="coi-post-card">
+  <div class="coi-post-card-title-container">
+    <h1 class="coi-post-card-title">
       <a class="coi-post-card-title-link" href="{{ post.url }}">{{ post.title }}</a>
     </h1>
-    <div class="coi-post-card-subtitle mdl-card__subtitle-text">
+    <div class="coi-post-card-subtitle">
       {{ post.date | date_to_string }}
     </div>
   </div>
-  <div class="coi-post-card-preview  mdl-card__supporting-text">
+  <div class="coi-post-card-preview">
     {{ post.excerpt }}
   </div>
 </section>
 {% endfor %}
 
-<div class="coi-paginator-bar mdl-grid">
+<div class="coi-paginator-bar">
     {% if paginator.previous_page %}
-    <div class="mdl-cell mdl-cell--6-col coi-paginator-previous">
-      <a href="{{ paginator.previous_page_path }}" class="mdl-button mdl-js-button coi-paginator-button coi-paginator-link">
+    <div class="coi-paginator-previous">
+      <a href="{{ paginator.previous_page_path }}" class="coi-paginator-button coi-paginator-link">
         <i class="fa fa-arrow-left"></i> Previous
       </a>
     </div>
     {% else %}
-    <div class="mdl-cell mdl-cell--6-col coi-paginator-placeholder"></div>
+    <div class="coi-paginator-placeholder"></div>
     {% endif %}
 
     {% if paginator.next_page %}
-    <div class="mdl-cell mdl-cell--6-col coi-paginator-button  coi-paginator-next">
-      <a href="{{ paginator.next_page_path }}" class="mdl-button mdl-js-button coi-paginator-button coi-paginator-link">
+    <div class="coi-paginator-next">
+      <a href="{{ paginator.next_page_path }}" class="coi-paginator-button coi-paginator-link">
         Next <i class="fa fa-arrow-right"></i>
       </a>
     </div>
