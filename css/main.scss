@@ -11,6 +11,9 @@ $coi-white: #fff;
 // DIMENSIONS
 $coi-simple-padding: 0.5em;
 
+$coi-tablet-breakpoint: 768px;
+$coi-desktop-breakpoint: 1024px;
+
 body {
   margin: 0px;
   color: $coi-light-gray;
@@ -32,7 +35,13 @@ body {
   }
 
   .coi-header-title {
-    font-size: 5em;
+    font-size: 2em;
+    @media screen and (min-width: $coi-tablet-breakpoint) and (max-width: $coi-desktop-breakpoint - 1 ) {
+      font-size: 3em;
+    }
+    @media screen and (min-width: $coi-desktop-breakpoint) {
+      font-size: 5em;
+    }
   }
 }
 
@@ -85,6 +94,16 @@ body {
         content: "";
         clear: both;
         display: table;
+      }
+    }
+    .coi-post-content {
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      pre {
+        overflow: scroll;
       }
     }
   }
