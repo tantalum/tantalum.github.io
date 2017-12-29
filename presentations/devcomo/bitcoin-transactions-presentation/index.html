@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>The Anatomy of Bitcoin Transactions</title>
+
+        <meta name="description" content="The Anatomy of Bitcoin Transactions">
+        <meta name="author" content="Nabil Alsharif">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/blit-tech.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+            <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Presentation Overview -->
+            <div class="slides">
+                <section>
+                    <h1>The Anatomy of Bitcoin Transactions</h1>
+                </section>
+
+                <section>
+                    <h2>About Me</h2>
+                    <p>Information Security Consultant @ <em>Blit-Tech</em></p>
+                    <p>Software Developer @ <em>Shelter Insurance</em></p>
+                    <p><em>Email:</em> <a href="mailto:blit32@gmail.com">nabil@blit.tech</a></p>
+                </section>
+
+                <section>
+                    <h2>Blockchains a Quick Refresher</h2>
+                    <img src="img/en-blockchain-overview.svg">
+                </section>
+
+                <section>
+                    <h2>What is a Bitcoin Transaction</h2>
+                    <p>A Bitcoin Transaction is a record assigning the outputs of a previous transaction to new outputs based on the Transaction Script</p>
+                </section>
+
+                <section>
+                    <h2>Glossary</h2>
+                    <dl>
+                        <dt>Bitcoin Address</dt><dd>The hash of a public key</dd>
+                        <dt>TxId<dt><dd>Transaction ID, hash of the transaction</dd>
+                        <dt>UTxO<dt><dd>Unspent Transaction Outputs</dd>
+                    </dl>
+                </section>
+
+                <section>
+                    <h2>Glossary Continued</h2>
+                    <dl>
+                        <dt>Public Key Script</dt><dd>Transaction output script that allows the holder of the corresponding private key to spend the output</dd>
+                        <dt>Signature Script<dt><dd>Script proving the creator is the owner of the corresponding private key</dd>
+                        <dt>Coinbase Transaction<dt><dd>Special transaction that creates a new Bitcoin</dd>
+                    </dl>
+                </section>
+
+                <section>
+                    <h2>The Transaction Structure</h2>
+                    <table>
+                        <thead>
+                            <tr><th>Size</th><th>Name</th><th>Type</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>4</td><td>version</td><td>uint32</td><td>Version Number</td></tr>
+                            <tr><td>0 or 2</td><td>flags</td><td>uint8[2]</td><td>Optional and always 0001</td></tr>
+                            <tr><td>1 to 9</td><td>tx_in count</td><td>var_int</td><td>Number of Input Transactions</td></tr>
+                            <tr><td>Varies</td><td>tx_in</td><td>Input Transactions</td><td>Specifies prev. output and signature script</td></tr>
+                            <tr><td>1 to 9</td><td>tx_out count</td><td>var_int</td><td>Number of Outputs</td></tr>
+                            <tr><td>Varies</td><td>tx_out</td><td>Output Transaction</td><td>The Output Transactions</td></tr>
+                            <tr><td>4</td><td>lock_time</td><td>uint32</td><td>Currently always 0.</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section>
+                    <h2>The tx_in Structure</h2>
+                    <table>
+                        <thead>
+                            <tr><th>Size</th><th>Name</th><th>Type</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>36</td><td>prev_output</td><td>outpoint</td><td>32 byte ID of the previous transaction + 4 byte index of specific output</td></tr>
+                            <tr><td>1 to 9</td><td>script length</td><td>var_int</td><td>The length of the Signature Script</td></tr>
+                            <tr><td>Varies</td><td>signature script</td><td>uchar[]</td><td>Script that confirms the specified output's script</td></tr>
+                            <tr><td>4</td><td>sequence</td><td>uint32</td><td>Currently not used</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section>
+                    <h2>The tx_out Structure</h2>
+                    <table>
+                        <thead>
+                            <tr><th>Size</th><th>Name</th><th>Type</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>8</td><td>value</td><td>int64</td><td>The output's value</td></tr>
+                            <tr><td>1 to 9</td><td>script length</td><td>var_int</td><td>The length of the pk_script</td></tr>
+                            <tr><td>Varies</td><td>pk_script</td><td>uchar[]</td><td>Script setting up the conditions that allow the coin to spent</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section>
+                    <h2>Implications of the Structure</h2>
+                    <ul>
+                        <li>The transaction must consume (spend) the full value of all it's inputs</li>
+                        <li>A transaction might have an output that is spent and another that isn't, thus UTxO</li>
+                        <li>Two transactions might attempt to spend the same output of a transaction.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Scripts</h2>
+                    <ul>
+                        <li><em>Where the magic happens</em></li>
+                        <li>Non Turing Complete</li>
+                        <li>Stack Based</li>
+                        <li>Stateless</li>
+                        <li>Accepted Scripts are Standardized</li>
+                        <li><em>Signature Script is prepended to PubKey Script</em></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>The Standard Scripts</h2>
+                    <ul>
+                        <li><em>P2PKH: </em>Pay to public key hash</li>
+                        <li><em>P2SH: </em>Pay to script hash</li>
+                        <li><em>Multisig: </em>m-of-n signatures</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2>"Other" Standard Scripts</h2>
+                    <ul>
+                        <li><em>Pubkey: </em>Simplified version of P2PKH. Not used in new transactions</li>
+                        <li><em>Null Data: </em>Standard script for storing arbitrary data on the blockchain</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2>P2PKH</h2>
+                    <h3>Signature Script</h3>
+                    <pre>&lt;Sig&gt; &lt;PubKey&gt;</pre>
+                    <h3>PubKey Script</h3>
+                    <pre>OP_DUP OP_HASH160 &lt;PubkeyHash&gt; OP_EQUALVERIFY OP_CHECKSIG</pre>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>P2PKH Evaluation</h2>
+                        <pre>&lt;Sig&gt; <span class="hl">&lt;PubKey&gt; OP_DUP</span> OP_HASH160 &lt;PubkeyHash&gt; OP_EQUALVERIFY OP_CHECKSIG</pre>
+                    </section>
+                    <section>
+                        <h2>P2PK Evaluation</h2>
+                        <pre>&lt;Sig&gt; &lt;PubKey&gt; <span class="hl">&lt;PubKey&gt; OP_HASH160</span> &lt;PubkeyHash&gt; OP_EQUALVERIFY OP_CHECKSIG</pre>
+                    </section>
+                    <section>
+                        <h2>P2PK Evaluation</h2>
+                        <pre>&lt;Sig&gt; &lt;PubKey&gt; <span class="hl">&lt;PubkeyHash&gt; &lt;PubkeyHash&gt; OP_EQUALVERIFY</span> OP_CHECKSIG</pre>
+                    </section>
+                    <section>
+                        <h2>P2PK Evaluation</h2>
+                        <pre><span class="hl">&lt;Sig&gt; &lt;PubKey&gt; OP_CHECKSIG</span></pre>
+                    </section>
+                    <section>
+                        <h2>P2PK Evaluation</h2>
+                        <pre>TRUE</pre>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>P2SH</h2>
+                    <h3>Signaure Script</h3>
+                    <pre>&lt;sig&gt; &lt;redeemScript&gt;</pre>
+                    <h3>PubKey Script</h3>
+                    <pre>OP_HASH160 &lt;Hash160(redeemScript)&gt; OP_EQAL</pre>
+                    <p>Any standard script can be used as the <code>redeemScript</code></p>
+                </section>
+
+                <section>
+                    <h2>MultiSig</h2>
+                    <h3>Signature Script</h3>
+                    <pre>OP_0 &lt;sig A&gt; [sig B] [sig C...]</pre>
+                    <h3>PubKey Script</h3>
+                    <pre>&lt;m&gt; &lt;A pk&gt; [B pk] [C pk..] &lt;n&gt; OP_CHECKMULTISIG</pre>
+                </section>
+
+                <section>
+                    <h2>Pubkey</h2>
+                    <h3>Signature Script</h3>
+                    <pre>&lt;sig&gt;</pre>
+                    <h3>PubKey Script</h3>
+                    <pre>&lt;pubkey&gt; OP_CHECKSIG</pre>
+                </section>
+
+                <section>
+                    <h2>Null Data</h2>
+                    <p>No Signature Script since the transaction is not spendable</p>
+                    <h3>PubKey Script</h3>
+                    <pre>OP_RETURN &lt;0 to 40 bytes of data&gt;</pre>
+                </section>
+
+                <section>
+                    <h2>Coinbase Transaction</h2>
+                    <ul>
+                      <li>The first transaction in a new block</li>
+                      <li>Has no input transactions</li>
+                      <li>Outputs define how the block reward (fees + subsidy) can be spend</li>
+                    </ul>
+                </section>
+
+                <section>
+                  <h2>The True Nature of Bitcois</h2>
+                  <p>A wallet's Bitcoins are just the UTxO in the block chain that the wallet is allowed to spend<p>
+                </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/zoom-js/zoom.js', async: true },
+    { src: 'plugin/notes/notes.js', async: true }
+    ]
+});
+
+        </script>
+
+    </body>
+</html>
