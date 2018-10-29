@@ -21,8 +21,6 @@ task :create_post, [:title, :date] do |t, args|
     puts "DATE is in the form: YYYY-MM-DD; use nil or the empty string for today's date"
     puts ""
 
-    title = args.title || "title"
-
     puts "Examples: create_post[\"\",\"#{args.title}\"]"
     puts "          create_post[nil,\"#{args.title}\"]"
     puts "          create_post[,\"#{args.title}\"]"
@@ -32,7 +30,7 @@ task :create_post, [:title, :date] do |t, args|
   post_title = args.title
   post_date = (args.date != nil and args.date != "" and args.date != "nil") ? args.date : Time.new.strftime($date_format)
 
-  def slugify (title)
+  def slugify(title)
     # strip characters and whitespace to create valid filenames, also lowercase
     return title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   end
@@ -59,4 +57,9 @@ task :create_post, [:title, :date] do |t, args|
   end  
 
   puts "Post created under \"#{$post_dir}#{filename}\""
+end
+
+desc "Dev Server with Drafts"
+task :devserver do |t|
+    sh "bundle exec jekyll serve --drafts"
 end
