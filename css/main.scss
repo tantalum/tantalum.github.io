@@ -2,31 +2,46 @@
 # Front matter so Jekyll will process this file
 ---
 
+// Colorscheme: https://coolors.co/5e2e86-f18f01-048ba8-99c24d-101935 
+
 // COLORS
-$coi-dark-gray: #202020;
-$coi-light-gray: #515151;
-$coi-off-white: #767676;
-$coi-white: #fff;
+$coi-violet: #5E2E86;
+$coi-orange: #F18F01;
+$coi-blue:   #048BA8;
+$coi-green:  #99C24D;
+$coi-teal:   #101935;
+$coi-white:  #fff;
 
 // DIMENSIONS
 $coi-simple-padding: 0.5em;
 
+$coi-post-margin-small: 0em 0em 0em;
+$coi-post-margin-med: 0em 2em 0em;
+$coi-post-margin-large: 0em 5em 0em;
+
 $coi-tablet-breakpoint: 768px;
 $coi-desktop-breakpoint: 1024px;
 
+h1 {
+    color: $coi-blue;
+}
+
+h2, h3, h4 {
+    color: $coi-teal;
+}
+
 body {
   margin: 0px;
-  color: $coi-light-gray;
   font-family: "Times New Roman", Times, serif;
 }
 
 .coi-navigation {
-  color: $coi-dark-gray;
+  color: $coi-blue;
   padding: $coi-simple-padding;
   text-align: center;
 
   a {
-    color: $coi-dark-gray;
+    color: $coi-blue;
     text-decoration: none;
   
     &:hover {
@@ -45,10 +60,20 @@ body {
   }
 
   .coi-header-navigation {
-      padding: 0.5em;
-      border-top: solid $coi-dark-gray 1px;
-      border-bottom: solid $coi-dark-gray 1px;
-  }
+      padding: $coi-simple-padding;
+      border-top: solid $coi-teal 1px;
+      border-bottom: solid $coi-teal 1px;
+
+      a {
+        color: $coi-violet;
+        text-decoration: none;
+      
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+   }
 }
 
 .coi-main {
@@ -56,12 +81,12 @@ body {
 
   //------ Post Listing on Main Page ----
   .coi-post-card {
-    border-bottom: solid $coi-off-white 1px;
+    border-bottom: solid $coi-teal 1px;
     .coi-post-card-title-container {
       .coi-post-card-title {
         margin-bottom: 0px;
         a.coi-post-card-title-link {
-          color: $coi-dark-gray;
+          color: $coi-blue;
           text-decoration: none;
           &:hover {
             text-decoration: underline;
@@ -69,20 +94,28 @@ body {
         }
       }
       .coi-post-card-subtitle {
-        color: $coi-off-white;
+        color: $coi-green;
       }
     }
   }
 
   //---- Full Post ---
   .coi-post {
-    .coi-post-header {
+    margin: $coi-post-margin-small;
+
+    @media screen and (min-width: $coi-tablet-breakpoint) and (max-width: $coi-desktop-breakpoint - 1 ) {
+      margin: $coi-post-margin-med;
+    }
+    @media screen and (min-width: $coi-desktop-breakpoint) {
+      margin: $coi-post-margin-large;
+    }
+     .coi-post-header {
       .coi-post-header-title {
-        color: $coi-dark-gray;
+        color: $coi-blue;
         margin-bottom: 0px;
       }
       .coi-post-header-date {
-        color: $coi-off-white;
+        color: $coi-green;
         float: left;
       }
       .coi-post-social-buttons {
@@ -91,7 +124,7 @@ body {
         .coi-post-social-button {
           display: inline-block;
           a {
-            color: $coi-off-white;
+            color: $coi-orange;
           }
         }
       }
