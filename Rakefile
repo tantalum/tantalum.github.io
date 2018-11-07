@@ -61,5 +61,5 @@ end
 
 desc "Dev Server with Drafts"
 task :devserver do |t|
-    sh "bundle exec jekyll serve --drafts"
+    sh "bundle exec jekyll serve --drafts --host=0.0.0.0"
 end
