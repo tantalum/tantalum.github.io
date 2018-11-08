@@ -78,18 +78,18 @@ body {
 
 .coi-main {
   padding: 0px $coi-simple-padding;
+  margin: $coi-post-margin-small;
+
+  @media screen and (min-width: $coi-tablet-breakpoint) and (max-width: $coi-desktop-breakpoint - 1 ) {
+    margin: $coi-post-margin-med;
+  }
+  @media screen and (min-width: $coi-desktop-breakpoint) {
+    margin: $coi-post-margin-large;
+  }
+
 
   //------ Post Listing on Main Page ----
   .coi-post-card {
-    margin: $coi-post-margin-small;
-
-    @media screen and (min-width: $coi-tablet-breakpoint) and (max-width: $coi-desktop-breakpoint - 1 ) {
-      margin: $coi-post-margin-med;
-    }
-    @media screen and (min-width: $coi-desktop-breakpoint) {
-      margin: $coi-post-margin-large;
-    }
-
     border-bottom: solid $coi-teal 1px;
     .coi-post-card-title-container {
       .coi-post-card-title {
@@ -154,5 +154,27 @@ body {
         overflow: scroll;
       }
     }
+  }
+
+  //-------------- PRESENTATIONS -------------
+  .coi-presentation {
+      h2 {
+          color: $coi-blue;
+      }
+
+      .coi-presentation-tuple {
+          padding-left: 1em;
+        
+          em {
+              font-weight: bold;
+              font-style: normal;
+          }
+      }
+  }
+
+  //-------------- FOOTER ---------
+  .coi-footer {
+      padding-top: 1em;
+      text-align: center;
   }
 }
