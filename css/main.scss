@@ -11,6 +11,7 @@ $coi-blue:   #048BA8;
 $coi-green:  #99C24D;
 $coi-teal:   #101935;
 $coi-white:  #fff;
+$coi-gray:   #777;
 
 // DIMENSIONS
 $coi-simple-padding: 0.5em;
@@ -22,6 +23,11 @@ $coi-post-margin-large: 0em 5em 0em;
 $coi-tablet-breakpoint: 768px;
 $coi-desktop-breakpoint: 1024px;
 
+body {
+  margin: 0px;
+  font-family: "Times New Roman", Times, serif;
+}
+
 h1 {
     color: $coi-blue;
 }
@@ -30,9 +36,8 @@ h2, h3, h4 {
     color: $coi-teal;
 }
 
-body {
-  margin: 0px;
-  font-family: "Times New Roman", Times, serif;
+blockquote {
+    color: $coi-gray;
 }
 
 .coi-navigation {
