@@ -1,0 +1,20 @@
+* About Me
+* What is Tor?
+* Uses
+
+* Tor's Components
+** Relays
+** Exit Nodes
+** Hidden Services
+
+* How Tor Works
+** Creating a circuit
+** Relaying Data
+
+* De-anonymizing Tor Users
+** Protocols Leaking IP Address
+** Cookies, browser fingerprinting etc
+** Flash, JavaScript and WebRTC (ICE) and DNS Queries
+** Bad OPSEC
+** Browser Exploits (FBI etc. Usually seen when law enforcement gains control over a server)
+** Traffic Analysis and/or Tagging

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>WiFi Insecurity</title>
+
+        <meta name="description" content="WiFi Insecurity">
+        <meta name="author" content="Nabil Alsharif">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/blit-tech.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+            <script src="lib/js/html5shiv.js"></script>
+            <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Presentation Overview -->
+            <div class="slides">
+                <section>
+                    <img src="img/BLIT-TECH-Logo-Color-fill.svg" width="500em" alt="Blit-Tech logo">
+                </section>
+
+                <section>
+                    <h1>WiFi Insecurity</h1>
+                    <p>A tour of common attacks on WiFi networks</p>
+                </section>
+
+                <section>
+                    <img src="img/BLIT-TECH-Logo-Color-fill.svg" width="500em" alt="Blit-Tech logo">
+                    <p>Information Security Consultant @ <em>Blit-Tech</em></p>
+                    <p>Software Developer @ <em>Shelter Insurance</em></p>
+                    <p><em>Email:</em> <a href="mailto:blit32@gmail.com">nabil@blit.tech</a></p>
+                </section>
+                
+                <section>
+                    <h2>What we are doing</h2>
+                    <p>Over of WiFi security standards and issues</p>
+                    <p>Krack a network and read packets</p>
+                </section>
+
+                <section>
+                    <h2>No Physical Access Control</h2>
+                    <p>Maybe the only issue that is <em>fundamental</em> to wireless security</p>
+                    <p>Most attacks use this to their advantage</p>
+                    <aside class="notes">
+                        <ul>
+                            <li>Cannot control who access the device</li>
+                            <li>Sniffing becomes very easy</li>
+                            <li>Injection becomes very easy</li>
+                            <li>All other attacks do not depend on wirelessness</li>
+                        </ul>
+                    </aside>
+                </section>
+
+                <section>
+                    <section>
+                        <!-- http://www.cs.sjsu.edu/~stamp/CS265/projects/Spr05/papers/WEP.pdf -->
+                        <h2>WEP</h2>
+                        <p><em>Don't</em> use this!!</p>
+                        <aside class="notes">
+                            <p><em>WEP</em>: Wired Equivalent Privacy</p>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <img src="img/wifi-wep-encryption.png">
+                        <p>
+                            <small>src: http://www.cs.sjsu.edu/~stamp/CS265/projects/Spr05/papers/WEP.pdf</small>
+                        </p>
+                        <aside class="notes">
+                            <p>Key is 64-bits, 24-bit IV + 40-bit Secret Key</p>
+                            <p>Secret Key is fixed</p>
+                            <p>This leads to a detectable key-reuse scenario with RC4</p>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h3>The Core Problem is IV is used incorrectly</h3>
+                        <p>Key Reuse with RC4</p>
+                        <aside class="notes">
+                            <p>Key is 64-bits, 24-bit IV + 40-bit Secret Key</p>
+                            <p>Secret Key is fixed</p>
+                            <p>This leads to a detectable key-reuse scenario with RC4</p>
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>WPA</h2>
+                        <p>Wi-Fi Protected Access</p>
+                        <aside class="notes">
+                            <p>Both a protocol and cerfitication program</p>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h3>WPA Modes</h3>
+                        <ul>
+                            <li><em>WPA-Personal</em>: Static pre-shared key (aka. password). Most common in homes and coffee shops.</li>
+                            <li><em>WPA-Enterprise</em>: Requires and authentication server, has lots of modes.</li>
+                            <li><em>WPS:</em> Wi-Fi Protected Setup. Uses and 8-digit PIN. Broken, disable if you can.</li>
+                        </ul>
+                        <aside class="notes">
+                            <p>These are all methods of establishing a pre-shared key (Pairwise Master Key) for connecting to the AP</p>
+                            <p>With WPA-Personal the pmk is derived by applying PKDF2-SHA1 to the password</p>
+                            <p>Wth WPA-Enterprise the psk/pmk is constructed from the EAP parameters</p>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h3>WPA's Keys</h3>
+                        <ul>
+                            <li><em>PMK</em>: Pairwise Master Key, derived from the password (WPA-Personal) or the EAP parameters.</li>
+                            <li><em>PTK</em>: Pairwise Transient Key, <code>PMK || ANonce || SNonce || AP MAC || Station MAC</code>, used to encrypt traffic</li>
+                            <li><em>GTK</em>: Group Temporal Key, used to encrypt/decrypt broadcast traffic. Generated by the AP</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>The WPA Handshake</h3>
+                        <ol>
+                            <li>The AP sends a nonce <code>ANonce</code> and a Key Replay Counter to the station.</li>
+                            <li>The station constructs the <code>PTK</code>. The station sends a nonce <code>SNonce</code>, a MIC and the Key Replay Counter to the AP.</li>
+                            <li>The AP verifies message 2 and then sends the <code>GTK</code> and another MIC to the station.</li>
+                            <li>The station verifies the AP's message and sends a confirmation</li>
+                        </ol>
+                        <aside class="notes">
+                            <p>The <code>SNonce</code> is not encrypted, because the AP needs to know the value before it can construct the <code>PTK</code></p>
+                            <p>The AP constructing the <code>PTK</code> confirms to the station that the AP knows the <code>PMK</code></p>
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>WPA 3</h2>
+                        <p>The Future!</p>
+                        <p><small>Thank you <a href="https://www.mathyvanhoef.com/2018/03/wpa3-technical-details.html">Mathy Vanhoef</a></small></p>
+                    </section>
+
+                    <section>
+                        <h3>More Secure Handshake</h3>
+                        <p>Eliminates offline dictionary attacks and provides forward secrecy using SAE</p>
+                        <aside class="notes">
+                            <p>SAE, Simultaneous Authentication of Equals, generates a new key that is then used in the traditional WPA handshake</p>
+                            <p>The password has to be available (aka stored) to the router in plaintext</p>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h3>Replace WPS</h3>
+                        <p>A little complicated, but is based on the devices wanting to connect providing a public key to the router</p>
+                        <aside class="notes">
+                            <p>QR-Code, Bluetooth, NFC etc used to communicate a public key to the router</p>
+                            <p>The PK used to create a temporary connection over which new creds are exchanged</p>
+                            <p>Creds are used to create a connector that is used for DH exchange</p>
+                            <p>The result of  the DH exchange is the PMK used in a traditional WPA handshake</p>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h3>Unauthenticated Encryption</h3>
+                        <p>Not sure how this will work, but Opportunistic Wireless Encryption (OWE) is a strong candidate</p>
+                        <aside class="notes">
+                            <p>DH exchange used to derive a PMK for a WPA handshake<p>
+                        </aside>
+                    </section>
+
+                </section>
+
+                <section>
+                    <h2>What wasn't discussed</h2>
+                    <ul>
+                        <li>KRACK</li>
+                        <li>WPS Pin Brute forcing</li>
+                        <li>TKIP Weaknesses</li>
+                        <li>Captive Portals</li>
+                        <li>Router-specific issues</li>
+                        <li>Lesser known issues</li>
+                        <li>"Regular" network attacks</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Demo Time!</h2>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/zoom-js/zoom.js', async: true },
+    { src: 'plugin/notes/notes.js', async: true }
+    ]
+});
+
+        </script>
+
+    </body>
+</html>
