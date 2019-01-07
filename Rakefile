@@ -1,5 +1,5 @@
 $post_ext ||= ".markdown"
-$post_dir ||= "_posts/"
+$post_dir ||= "_drafts/"
 $date_format ||= "%Y-%m-%d"
 
 # Based off of the taks in the jekyll-rakefile project
