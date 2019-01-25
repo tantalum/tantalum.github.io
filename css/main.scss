@@ -12,6 +12,7 @@ $coi-green:  #99C24D;
 $coi-teal:   #101935;
 $coi-white:  #fff;
 $coi-gray:   #777;
+$coi-very-light-gray: #fbfbfb;
 
 // DIMENSIONS
 $coi-simple-padding: 0.5em;
@@ -82,6 +83,7 @@ blockquote {
 .coi-main {
   padding: 0px $coi-simple-padding;
   margin: $coi-post-margin-small;
+  background: $coi-very-light-gray;
 
   @media screen and (min-width: $coi-tablet-breakpoint) and (max-width: $coi-desktop-breakpoint - 1 ) {
     margin: $coi-post-margin-med;
@@ -94,9 +96,10 @@ blockquote {
   //------ Post Listing on Main Page ----
   .coi-post-card {
     border-bottom: solid $coi-teal 1px;
+    margin-bottom: 3em;
     .coi-post-card-title-container {
       .coi-post-card-title {
-        margin-bottom: 0px;
+        margin: 0px;
         a.coi-post-card-title-link {
           color: $coi-blue;
           text-decoration: none;
@@ -124,7 +127,7 @@ blockquote {
      .coi-post-header {
       .coi-post-header-title {
         color: $coi-blue;
-        margin-bottom: 0px;
+        margin: 0px;
       }
       .coi-post-header-date {
         color: $coi-green;
