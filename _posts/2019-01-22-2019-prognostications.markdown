@@ -9,7 +9,7 @@ Radio](https://www.kopn.org/programs/tech-radio/) it's time to get this
 year's predictions and prognostications going. Here are my top tech
 predictions for 2019:
 
-<!-- more -->
+<!--more-->
 
 ## Bitcoin and Crypto Currencies Will Raise Again
 
