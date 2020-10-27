@@ -41,6 +41,34 @@
   <meta name="twitter:description" content="{{ page.excerpt | strip_html }}" />
   {% endif %}
 
+  <!-- ld+json -->
+  <script type="application/ld+json">
+  {% if page.path == 'index.html' %}
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Circuits of Imagination",
+    "url": "https://blog.circuitsofimagination.com/",
+  }
+  {% else %}
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://blog.circuitsofimagination.com/"
+    },
+    "headline": "{{ page.title }}",
+    "datePublished": "{{ page.date }}",
+    "dateModified": "{{ page.date }}",
+    "author": {
+      "@type": "Person",
+      "name": "Nail Alsharif"
+    }
+  }
+  {% endif %}
+  </script>
+
 </head>
 <body>
   <div class="coi-page-wrapper"> <!-- Begin Layout -->
