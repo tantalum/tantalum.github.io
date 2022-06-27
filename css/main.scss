@@ -5,14 +5,19 @@
 // Colorscheme: https://coolors.co/5e2e86-f18f01-048ba8-99c24d-101935 
 
 // COLORS
-$coi-violet: #5E2E86;
-$coi-orange: #F18F01;
 $coi-blue:   #048BA8;
-$coi-green:  #99C24D;
-$coi-teal:   #101935;
 $coi-white:  #fff;
 $coi-gray:   #777;
 $coi-very-light-gray: #fbfbfb;
+
+$coi-color-site-title: #FFF;
+$coi-color-site-header-bg: #000;
+$coi-color-site-navigation: #fff;
+
+$coi-color-post-title: #444;
+$coi-color-post-header: #000;
+$coi-color-post-date: #777;
+$coi-color-post-social: #777;
 
 // DIMENSIONS
 $coi-simple-padding: 0.5em;
@@ -30,11 +35,11 @@ body {
 }
 
 h1 {
-    color: $coi-blue;
+    color: $coi-color-post-title;
 }
 
 h2, h3, h4 {
-    color: $coi-teal;
+    color: $coi-color-post-header;
 }
 
 blockquote {
@@ -42,12 +47,13 @@ blockquote {
 }
 
 .coi-navigation {
-  color: $coi-blue;
   padding: $coi-simple-padding;
+  margin-bottom: $coi-simple-padding;
+  background: $coi-color-site-header-bg;
   text-align: center;
 
   a.coi-header-title {
-    color: $coi-orange;
+    color: $coi-color-site-title;
     text-decoration: none;
   
     &:hover {
@@ -65,11 +71,9 @@ blockquote {
 
   .coi-header-navigation {
       padding: $coi-simple-padding;
-      border-top: solid $coi-teal 1px;
-      border-bottom: solid $coi-teal 1px;
 
       a {
-        color: $coi-violet;
+        color: $coi-color-site-navigation;
         text-decoration: none;
       
         &:hover {
@@ -95,13 +99,13 @@ blockquote {
 
   //------ Post Listing on Main Page ----
   .coi-post-card {
-    border-bottom: solid $coi-teal 1px;
+    border-bottom: solid #000 1px;
     margin-bottom: 3em;
     .coi-post-card-title-container {
       .coi-post-card-title {
         margin: 0px;
         a.coi-post-card-title-link {
-          color: $coi-blue;
+          color: $coi-color-post-header;
           text-decoration: none;
           &:hover {
             text-decoration: underline;
@@ -109,7 +113,7 @@ blockquote {
         }
       }
       .coi-post-card-subtitle {
-        color: $coi-green;
+        color: $coi-color-post-date;
       }
     }
   }
@@ -126,11 +130,11 @@ blockquote {
     }
      .coi-post-header {
       .coi-post-header-title {
-        color: $coi-blue;
+        color: $coi-color-post-title;
         margin: 0px;
       }
       .coi-post-header-date {
-        color: $coi-green;
+        color: $coi-color-post-date;
         float: left;
       }
       .coi-post-social-buttons {
@@ -139,7 +143,7 @@ blockquote {
         .coi-post-social-button {
           display: inline-block;
           a {
-            color: $coi-orange;
+            color: $coi-color-post-social;
           }
         }
       }
@@ -165,7 +169,7 @@ blockquote {
   //-------------- PRESENTATIONS -------------
   .coi-presentation {
       h2 {
-          color: $coi-blue;
+          color: $coi-color-post-title;
       }
 
       .coi-presentation-tuple {
