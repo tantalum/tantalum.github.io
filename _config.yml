@@ -1,14 +1,15 @@
-name: Circuits Of Imagination
-description: Thoughts about computers, programming, the net and the world.
-url: http://blog.circuitsofimagination.com
+name: "Circuits Of Imagination"
+description: "Thoughts about computers, programming, the net and the world."
+url: "http://blog.circuitsofimagination.com"
 markdown: kramdown
 highlighter: rouge
 safe: true  
 excerpt_separator: "<!--more-->"
-paginate: 5
+paginate: 10
 paginate_path: "page:num"  
 plugins:
   - jekyll-paginate
+  - jekyll-sitemap
 exclude:
   - Gemfile
   - Gemfile.lock  
