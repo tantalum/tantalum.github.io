@@ -5,14 +5,23 @@ date: 2020-10-16
 tags: fediverse, social media
 ---
 
-The Fediverse is one of the fastest growing social media platforms. More importantly the Fediverse is a new paradigm and platform to build online social experiences. So what is the Fediverse and what does it mean to you?
+Outline:
+[✓] The Fediverse is a collection of application that use the ActivityPub Protocol
+[✓] You can connect to users from different sites or applications all in one place
+[ ] Different sites using the same protocol means no central walled gardens
+[ ] Different sites using the same protocol means updates to the protocol are hard
+[ ] Spam
+
+By the time you are reading this you've probably heard of "The Fediverse", or at least Mastodon. At the time I am writing this post, the Fediverse is the fastest growing social media "platform". At the same time, most people don't know what the Fediverse is or what makes it different from Facebook, TikTok or X. 
 
 Lets start with what the Fediverse is. Wikipedia defines the [Fediverse](https://en.wikipedia.org/wiki/Fediverse) as:
 
 > The fediverse (a portmanteau of "federation" and "universe") is an ensemble of federated (i.e. interconnectedv) servers that are used for web publishing [...] and file hosting, but which, while independently hosted, can communicate with each other. 
 
-More commonly the Fediverse is defined as the set of applications (e.g. Mastodon or PeerTube) that can communicate using the [ActivityPub](https://www.w3.org/TR/activitypub/) protocol, the servers and groups that host the applications, and the users of those applications and the content they create. A key aspect of the Fediverse is that anyone can host their own instance of an ActivityPub application and expand the Fediverse. Another key aspect is that different applications can all intercommunicate since they all talk the same language, ActivityPub.
+More commonly the Fediverse is defined as the set of applications (e.g. Mastodon or PeerTube) that can communicate using the [ActivityPub](https://www.w3.org/TR/activitypub/) protocol, the servers and groups that host the applications, and the users of those applications and the content they create. All of that together makes up the Fediverse. The key difference between the Fediverse and traditional social media sites like Facebook or YouTube is the addition of the ActivityPub protocol and servers into the mix. Anyone can setup a Mastodon server, and anyone can write a new application that uses the ActivityPub protocol, and that server or that application can (within reason) communicate with any other server or application in the Fediverse
 
 <!--more-->
 
-Let's make all that more concrete. The two most popular Fediverse applications are Mastodon form micro blogging and PeerTube for video sharing. [Noc.social](https://noc.social/home) hosts a Mastodon instance and I have an account on that instance. I can follow other Mastodon users either on my home instance (noc.social in this case) or on other instance such as [infosec.exchange](https://infosec.exchange/explore). I can also follow a PeerTube account, like [babbagebool](https://diode.zone/a/babbageboole/video-channels) because PeerTube also uses the ActvityPub protocol.
+Let's make all that more concrete. The two most popular Fediverse applications are Mastodon form micro blogging and PeerTube for video sharing. [Noc.social](https://noc.social/home) hosts a Mastodon instance and I have an account on that instance. I can follow other Mastodon users either on my home instance (noc.social in this case) or on other instance such as [infosec.exchange](https://infosec.exchange/explore). I can also follow a PeerTube account, like [babbagebool](https://diode.zone/a/babbageboole/video-channels) because PeerTube also uses the ActvityPub protocol. Imagine being able to follow a YouTube channel from your Instagram account.
+
+
