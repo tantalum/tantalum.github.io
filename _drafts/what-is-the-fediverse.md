@@ -31,3 +31,14 @@ More commonly the Fediverse is defined as the set of applications (e.g. Mastodon
 Let's make all that more concrete. The two most popular Fediverse applications are Mastodon form micro blogging and PeerTube for video sharing. [Noc.social](https://noc.social/home) hosts a Mastodon instance and I have an account on that instance. I can follow other Mastodon users either on my home instance (noc.social in this case) or on other instance such as [infosec.exchange](https://infosec.exchange/explore). I can also follow a PeerTube account, like [babbagebool](https://diode.zone/a/babbageboole/video-channels) because PeerTube also uses the ActivityPub protocol. A common, but imperfect, analogy is email. You can have an account on gmail.com and your friend can have an email account at hotmail.com and you can both still send and receive emails with each other.
 
 ![Centralized vs. Decentralizes vs. Distributed](/img/centralized-vs-decentralized-vs-distributed.png)
+
+Facebook, X (aka Twitter) and YouTube are all centralized services. If I want to talk to or interact with any of my friends on Facebook, I need to have a Facebook account and log into Facebook. Same thing with YouTube, if I want to follow a channel or comment on a video on YouTube, I have to have a YouTube account. Cross posting content from Facebook to X is not an option. 
+
+Along the same line there is only 1 Facebook. The fecebook.com website is run by Meta. No one else can create another Facebook instance and even if they manage to create something that is _facebook like_, they will never be allowed to interact with the _real facebook_. Whereas with The Fediverse anyone can spin up a site that can interact with any other site on The Fediverse. Anyone can spin up a new Mastodon site, but no one will be able to spin up a new X. In fact there are even services out there that will help you spin up your own dedicated Mastodon instance. The official Mastodon documentation has a section on [how to spin up your own instance](https://docs.joinmastodon.org/user/run-your-own/).
+
+Decentralization is the key difference between The Fediverse and traditional social media platforms and brings with it a number of fundamental differences in how you, as a user, might approach this decentralized world.
+
+### Instances, Funding and Accountability
+
+
+
