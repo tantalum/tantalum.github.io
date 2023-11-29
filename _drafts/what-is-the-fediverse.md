@@ -40,5 +40,16 @@ Decentralization is the key difference between The Fediverse and traditional soc
 
 ### Instances, Funding and Accountability
 
+When you sign up for a Facebook account the only option you have to so sign up on Facebook. Facebook lets you create an account and hosts your data for free and does that for billions of users costing Facebook billions of dollars a year. At the same time by signing up with Facebook you agree to have your data mined and shared with advertisers and affiliates, you also agree to have ads and content you never signed up for displayed in your feed. You also agree to abide by Facebooks terms of service, and content moderation policies. If you don't like that arrangement, your only option is to not sign up with Facebook. 
 
+When you sign up for a Mastodon account, you first have to pick the _instance_ you want to sign up with. Once you've picked an instance you can start following users on other instances, and users on other instances can start following you and interacting with your content. So why have instances in the first place?
 
+#### Moderation and Acceptable Use
+
+Each instance's administrators are responsible for defining the instance's acceptable use policy and enforcing that policy through moderation. This means that different instance will have different policies about what content is and isn't allowed. For example some instances allow adult (aka. NSFW) content, while some instances have very strict no NSFW content policies. The instance administrators and moderators are also responsible for enforcing the instance's policy and taking action against offending users. There are a [number of actions that can be taken against offending users](https://docs.joinmastodon.org/admin/moderation/), ranging from marking the account as sensitive alerting other users to potentially-harmful content all the way to suspending the account, effectively deleting the account and the content associated with it.
+
+Because of the Federated nature of the Fediverse, a user X on instance A might follow or interact with another user Y on instance B with a more lax content policy. This would cause the violating posts from Y to show up on instance A's federated timeline. In that case instance A's moderators might take action against user Y, or against the entire B instance. The thing to keep in mind is that whatever enforcement action instance A's admins take, it will only impact users on instance A. A third instance might take completely different moderation actions or no action at all. 
+
+This means users have the choice, and associated responsibility, to choose an instance whose usage guidelines aligns with their views and tastes.
+
+#### Funding
