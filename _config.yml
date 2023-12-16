@@ -13,3 +13,5 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock  
+  - Rakefile
+  - CNAME
