@@ -37,19 +37,25 @@ Facebook, X (aka Twitter) and YouTube are all centralized services. If I want to
 
 Along the same line there is only 1 Facebook. The Facebook.com website is run by Meta. No one else can create another Facebook instance and even if they manage to create something that is _Facebook like_, they will never be allowed to interact with the _real Facebook_. Whereas with The Fediverse anyone can spin up a site that can interact with any other site on The Fediverse. Anyone can spin up a new Mastodon site, but no one will be able to spin up a new X. In fact there are even services out there that will help you spin up your own dedicated Mastodon instance. The official Mastodon documentation has a section on [how to spin up your own instance](https://docs.joinmastodon.org/user/run-your-own/).
 
-Decentralization is the key difference between The Fediverse and traditional social media platforms and brings with it a number of fundamental differences in how you, as a user, might approach this decentralized world.
+Decentralization is the key difference between The Fediverse and traditional social media platforms and brings with it a number of fundamental differences in how you, as a user, might approach this decentralized world. Going forward I am going to focus mostly on Mastodon, but the discussion is applicable to any Fediverse application.
 
-### Reach and Global Search
-
-Lets talk about what happens when you post something on Mastodon. When you post a new Toot on Mastodon, your instances stores your Toot in your "Outbox". Anyone that follows your account can then request your Toots from your outbox. By default Mastodon will publish all of the Toots from all of the users on your instance to the "Local" time line. If a users on your instance follows a users on another instance, Mastodon will collect the toots from all those other users in the "Local" timeline. All this means is that there is no single global timeline in the Fediverse.
-
-TODO: Finish me
-
-### Instances, Funding and Accountability
+### Instances
 
 When you sign up for a Facebook account the only option you have to so sign up on Facebook. Facebook lets you create an account and hosts your data for free and does that for billions of users costing Facebook billions of dollars a year. At the same time by signing up with Facebook you agree to have your data mined and shared with advertisers and affiliates, you also agree to have ads and content you never signed up for displayed in your feed. You also agree to abide by Facebook's terms of service, and content moderation policies. If you don't like that arrangement, your only option is to not sign up with Facebook. 
 
 When you sign up for a Mastodon account, you first have to pick the _instance_ you want to sign up with. Once you've picked an instance you can start following users on other instances, and users on other instances can start following you and interacting with your content. So why have instances in the first place?
+
+In the most general sense an instance is a website that adheres to the ActivityPub protocol. Most commonly _an instance_ is taken to mean a website running one of the many Fediverse applications like PeerTube or Mastodon. So a Mastodon instance like [mastodon.social](https://mastodon.social/) is a website running a copy of the Mastodon software and can communicate with other in the Fediverse. Back to the email analogy think of an instance like an email provider, so Gmail and Yahoo would be different email instances.
+
+### Reach and Global Search
+
+Lets talk about what happens when you post something on Mastodon. When you post a new Toot on Mastodon, your instances stores your Toot in your "Outbox". Anyone that follows your account can then request your Toots from your outbox. There is some technical fibble-fabble I am glossing over but the summary is your Mastodon instance will collect all the posts from everyone you follow and present them in your "Home" timeline. By default Mastodon will publish all of the Toots from all of the users on your instance to the "Local" timeline. If a users on your instance follows a users on another instance, Mastodon will collect the toots from all those other users in the "Federated" timeline. This means that your instance will publish the sum of the public toots from everyone that followed by someone on your instance.
+
+To clarify lets say that I have an account on instance X, and you have an account on instance Y and that I don't follow your account. Unless someone on my instance (instance X) follows your account on Y, your toots will never show up on my timeline. This also means that the Federated timeline on my instance X will be different than the Federated timeline on your instance Y, because the users on my instance follow different accounts than the ones followed by the users if your instance. 
+
+Because there is no centralized server collecting all the posts from all the users in the Fediverse, there is no single global timeline in the Fediverse. Instead it all depends on who you follow and what the other users on your instance follow too. This might sound scary if you are an influencer looking for follower counts or reach, but is great if you are looking engagement and interaction. This is because mastodon instance self-select for specific audiences and niches, and you can target the niche you want by picking the right instance.
+
+This same phenomenon applies to search. Because there is no central database storing all the content ever published on the Fediverse, you cannot search the entire Fediverse. Instead when you search for something on an instance, you will be limited to the content available and reachable from that instance.
 
 #### Moderation and Acceptable Use
 
