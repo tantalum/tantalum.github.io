@@ -58,11 +58,15 @@ Along the same lines each time we receive an event from a player we can order th
 
 By definition Big Data sets are too large to process as one single sum. In all but the most extreme cases you will want to process only a subset of the data and partitioning is how the data is sliced up into subsets. Partitioning in the big data world usually comes in two flavors: Partitioning the data for processing and partitioning the data for storage and retrieval, i.e. querying and analysis.
 
+### Paritioning Data For Processing
+
 Ideally partitioning the data during processing should allow for the uniform distribution of the data across the available computation nodes. In other words we want each of the nodes in the cluster to process a similar amount of data, for new data to be available for node to process as soon as it is done processing the current data item, and for a node to be available to process a data item as soon as the data is created. At the same time there might be ordering constraints that need to be taken into account or a need to group similar items during processing.
 
 Partitioning the data during processing also provide some partial ordering guarantees. A partitioning scheme that guarantees that all the events for a given player will be processed by the same node means that the node can inspect the state of the current player knowing that no other node will also be inspecting and updating the same player's state. In our example we would want a data processing partitioning scheme that will guarantees that all messages from a given player are processed by the same node, so that the processing node can inspect the current "last known" location and possibly update it without other nodes also updating the same player's current location causing race conditions. We might not want the entire data processing pipeline to utilize the same partitioning scheme, but we do want the portion that checks and updates the current state of the player to use such a scheme. 
 
 If we do follow such a partitioning scheme when updating a users latest location, we won't need an atomic check-and-update operation any more since we know that only one node will be updating a given players location. In other words we might be updating the latest location of multiple players in parallel, but for any given player, because of how we partitioned the data, we know that only one node will be updating that players latest location. The downside is that we might have a sub-optimal partitioning scheme from a data processing perspective. If you have 100 nodes, but only have 70 players currently playing the game, our partitioning scheme means that at-most 70 nodes will be used for processing the data from those players and that at least 30 nodes will be sitting idle without any data to process.
+
+### Prtitioning Data for Storage 
 
 Partitioning the data for storage and retrieval is a little more complex because the "ideal" partitioning scheme doesn't exist. Instead how the data is partitioned will highly depend on how the data is expected to be accessed. To illustrate that let assume you want to two types for analysis on your accumulated player data:
 
@@ -89,3 +93,10 @@ WHERE
 GROUP BY actions.player, actions.session;
 ```
 
+#### Case 1: No Partitioning
+
+No partitioning is not a practical approach because if your data is all in just one big blob, that blob will eventually become too big to read and process. 
+
+#### Case 2: Partitioning By Action Type - Player - Date
+
+#### Case 3: Partitioning by Date - Player - Action Type
