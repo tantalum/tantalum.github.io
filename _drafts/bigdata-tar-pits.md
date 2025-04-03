@@ -72,6 +72,8 @@ Partitioning the data for storage and retrieval is a little more complex because
 
 The first type of analysis is to build up reports and aggregates on how many players performed certain actions or reach certain milestones over a given time line. For example how many players beat level 10 this month compared to last month. In SQL that would look something like this:
 
+*Action Frequency*
+
 ```sql
 SELECT 
 	actions.type, sum(1) as cnt 
@@ -84,6 +86,8 @@ GROUP BY actions.type;
 
 The second type of analysis is to build up report on player development. For example what was the average play duration for a given player this month compared to last month.
 
+*Play duration*
+
 ```sql
 SELECT 
 	actions.player, actions.session, min(actions.timestamp), max(actions.timestamp) 
@@ -95,8 +99,10 @@ GROUP BY actions.player, actions.session;
 
 #### Case 1: No Partitioning
 
-No partitioning is not a practical approach because if your data is all in just one big blob, that blob will eventually become too big to read and process. 
+No partitioning is not a practical approach because if your data is all in just one big blob, that blob will eventually become too big to read and process. At the very least data is usually partitioned by date, which in this case would mean the queries above could limit their search to just the data in the date range they need but also means the queries will have to parse through _all_ the data in that date range.
 
 #### Case 2: Partitioning By Action Type - Player - Date
+
+
 
 #### Case 3: Partitioning by Date - Player - Action Type
