@@ -2,7 +2,7 @@
 title: "Big Data Tar Pits"
 layout: post
 date: 2024-01-09
-tags: big data, architecture
+tags: big data, architecture, distributed computing, data processing
 ---
 
 # Outline
@@ -10,9 +10,8 @@ tags: big data, architecture
 - What is Big Data
 - Tar Pits
     - [X] Data Partitioning
-    - [ ] Reprocessing Plan
-    - [ ] Pre-Compute Aggregates
-    - [ ] At Lease Once vs. At Most Once vs. Exactly Once
+    - [X] Reprocessing Plan
+    - [X] At Lease Once vs. At Most Once vs. Exactly Once
     - [X] Time is an Illusion
 
 # What is Big Data
@@ -29,7 +28,7 @@ Which lines up pretty closely with Wikipedia's definition of Big Data:
 
 In essence "Big Data" is an ambiguous term that is generally understood to mean any data that can't processed using "traditional", for some definition of traditional, data processing mechanisms. The need for special data processing usually stems from either the speed which the data is changing, call the data velocity; Or the size of the data, called the volume.
 
-Managing big data usually means designing a system that will allow for distributing the data, and the processing of the data, across multiple compute and storage nodes in a cluster. Even if the exact mechanics of distributing the data and computation is abstracted behind a framework like [Hadoop](https://hadoop.apache.org/), [Spark](https://spark.apache.org/), or [Flink](https://flink.apache.org/) the distributed nature of the system needs to be taken into account. 
+Managing big data usually means designing a system that will allow for distributing the data, and the processing of the data, across multiple compute and storage nodes in a cluster aka a Distributed Data Processing System. Even if the exact mechanics of distributing the data and computation is abstracted behind a framework like [Hadoop](https://hadoop.apache.org/), [Spark](https://spark.apache.org/), or [Flink](https://flink.apache.org/) the distributed nature of the system needs to be taken into account. 
 
 # Tar Pits
 
@@ -40,13 +39,13 @@ To help discuss our tar pits we are going to make up an example use case. Our us
 
 ## Time is an Illusion
 
-When processing data in a big data system, you are most likely processing multiple data items in parallel across a cluster of machines. The distributed and parallel nature of the processing means that you lose most guarantees over message ordering, especially global ordering. 
+When processing data in a distributed system, you are most likely processing multiple data items in parallel across a cluster of machines. The distributed and parallel nature of the processing means that you lose most guarantees over message ordering, especially global ordering. 
 
 In our game, multiple users are sending us messages with updates to their location. User A might live closer to our data center than user B. It is easy to imagine how an message from user B might arrive after a message from user A, even though the event occurred and was sent before user A's message. Even further once the messages are received the are put on a queue (e.g. a Kafka queue) and as nodes on the cluster become free they will pickup the next available message form the queue. A node might pick up a message from user A, and another node pickup the message from user B. The second node might finish processing message B and send the result down to the next step in the pipeline before the first node is done processing message A. The point is even if you could receive messages in order, processing them in parallel means you lose any guarantees that the messages will finish processing in the same order.
 
 A seemingly easy solution to this whole mess is to use timestamps to order events. Basically our game will attach a timestamp to each message before the message is sent. The issue here is that you can't rely on client machines to have accurate timestamps. You can't even rely on machines you control to have accurate and synchronized timestamps. Timestamps on a single machine can jitter giving subsequent messages timestamps that occur "before" previous messages.
 
-Relying on timestamps to order events is a common tar pit I see big data solutions fall into. The issue with using timestamps is that they work 90% of the time and might honestly be good enough for your use case. However a much more reliable and future-proof solution is to utilize and explicit ordering counter, like a sequence number. You cannot achieve global ordering, but you can achieve strong local ordering by using an event sequence number.
+Relying on timestamps to order events is a common tar pit I see distributed solutions fall into. The issue with using timestamps is that they work 90% of the time and might honestly be good enough for your use case. However a much more reliable and future-proof solution is to utilize and explicit ordering counter, like a sequence number. You cannot achieve global ordering, but you can achieve strong local ordering by using an event sequence number.
 
 Going back to our example, there is no way to achieve exact ordering of messages across all player, but we don't need global ordering either. What we need is ordering of events per-player. Like we said we can't use timestamps to order events even for a single player session. What we can do though is use a sequence number where each time the game sends a message for a player it increments that player's event sequence number.
 
@@ -58,7 +57,7 @@ Along the same lines each time we receive an event from a player we can order th
 
 ## Data Partitioning
 
-By definition Big Data sets are too large to process as one single sum. In all but the most extreme cases you will want to process only a subset of the data and partitioning is how the data is sliced up into subsets. Partitioning in the big data world usually comes in two flavors: Partitioning the data for processing and partitioning the data for storage and retrieval, i.e. querying and analysis.
+By definition Big Data sets are too large to process as one single sum. In all but the most extreme cases you will want to process only a subset of the data and partitioning is how the data is sliced up into subsets. Partitioning in the distributed processing world usually comes in two flavors: Partitioning the data for processing and partitioning the data for storage and retrieval, i.e. querying and analysis.
 
 ### Partitioning Data For Processing
 
@@ -102,4 +101,17 @@ At the same time this partitioning scheme is designed to fit the queries criteri
 
 # Have a Reprocessing Plan
 
-When working with a distributed system, the question isn't _if_ something will fail, it is _when_ will it fail.
+When working with a distributed system, the question isn't _if_ something will fail, it is _when_ will it fail. When processing a million events a day a "1 in a million" chance is a daily occurrence. Network connections will fail, hosts in your cluster will have storage issues, you will write and push buggy code. As a result trying to predict and react to every possible issue in a distributed data processing system is impractical. A much more practical approach is to have a data reprocessing plan, that will easily allow you to identify and remove any corrupted data and then re-submit your source data for processing by the system. Generally speaking a reprocessing plan, like automated testing, is much easier to build while the system is being defined and built instead of retroactively trying to create a re-processing plan for an already operational system. 
+
+One major key when defining your data processing plan is to determine if you need to process each data element at-least-once or at-most-once. Ensuring any data element gets processed exactly-once is very difficult. In theory ensuring each data element gets processed only once sound plausible, but to do so would require surgical cleaning up of corrupt data and then reprocessing of only the data elements corresponding to the corrupt data all while the system is still actively processing other data. Another way of looking at that is the requirement to re-process data means that your system will have to be able to handle processing a given data element more than once. Finally different portions of your pipeline might have different data processing requirements. 
+
+At least once processing means that you are able to process the same data element multiple times and produce the correct result. This is also called idempotent processing. An example of this is determining a players last-seen location. For any given data element I can check the event-sequence (see: Time is an Illusion above) of the current event is greater than the event-sequence of the last known location: If the current sequence is greater I update the last known location and sequence number, otherwise I ignore the current event. This means if I see the same event multiple times, my system will still produce the correct last seen location. 
+
+At once processing processing means that your system can't handle seeing the same event multiple times, but can handle data loss. An example of this use case is calculating averages: If I incorporate the same event multiple times into the average calculation, my average will be skewed. At the same time, if miss a few data points from my average calculation my average will still be correct within a given tolerance level. So when I am pre-computing an average I might chose to use at most once processing, but when I am computing a min or max value I would prefer at least once processing since those are idempotent operations.
+
+-------------------------------------
+
+# Ok, Now What?
+
+Why write this? Because I have worked with distributed data processing systems that fallen into at leas of the tar pits above and resulted in significant time and cost to try and fix the issues those tar pits caused. Making this even worse getting a system out of any of those tar pits will come with even more costs, and might not be feasible without a significant re-design of the system. My hope is that this article will help you avoid falling into those tar pits.
+
