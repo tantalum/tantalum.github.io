@@ -54,11 +54,13 @@ When developing the map of the current player locations, whenever we receive a n
 
 Along the same lines each time we receive an event from a player we can order the events by sequence number to make sure we are displaying the timeline of movements in the correct order. 
 
+------------------
+
 ## Data Partitioning
 
 By definition Big Data sets are too large to process as one single sum. In all but the most extreme cases you will want to process only a subset of the data and partitioning is how the data is sliced up into subsets. Partitioning in the big data world usually comes in two flavors: Partitioning the data for processing and partitioning the data for storage and retrieval, i.e. querying and analysis.
 
-### Paritioning Data For Processing
+### Partitioning Data For Processing
 
 Ideally partitioning the data during processing should allow for the uniform distribution of the data across the available computation nodes. In other words we want each of the nodes in the cluster to process a similar amount of data, for new data to be available for node to process as soon as it is done processing the current data item, and for a node to be available to process a data item as soon as the data is created. At the same time there might be ordering constraints that need to be taken into account or a need to group similar items during processing.
 
@@ -66,7 +68,7 @@ Partitioning the data during processing also provide some partial ordering guara
 
 If we do follow such a partitioning scheme when updating a users latest location, we won't need an atomic check-and-update operation any more since we know that only one node will be updating a given players location. In other words we might be updating the latest location of multiple players in parallel, but for any given player, because of how we partitioned the data, we know that only one node will be updating that players latest location. The downside is that we might have a sub-optimal partitioning scheme from a data processing perspective. If you have 100 nodes, but only have 70 players currently playing the game, our partitioning scheme means that at-most 70 nodes will be used for processing the data from those players and that at least 30 nodes will be sitting idle without any data to process.
 
-### Prtitioning Data for Storage 
+### Partitioning Data for Storage 
 
 Partitioning the data for storage and retrieval is a little more complex because the "ideal" partitioning scheme doesn't exist. Instead how the data is partitioned will highly depend on how the data is expected to be accessed. To illustrate that let assume you want to two types for analysis on your accumulated player data:
 
@@ -84,25 +86,20 @@ WHERE
 GROUP BY actions.type;
 ```
 
-The second type of analysis is to build up report on player development. For example what was the average play duration for a given player this month compared to last month.
-
-*Play duration*
-
-```sql
-SELECT 
-	actions.player, actions.session, min(actions.timestamp), max(actions.timestamp) 
-FROM mydb.actions 
-WHERE 
-	actions.timestamp > MONTH_START and actions.timestamp < MONTH_END 
-GROUP BY actions.player, actions.session;
-```
-
 #### Case 1: No Partitioning
 
 No partitioning is not a practical approach because if your data is all in just one big blob, that blob will eventually become too big to read and process. At the very least data is usually partitioned by date, which in this case would mean the queries above could limit their search to just the data in the date range they need but also means the queries will have to parse through _all_ the data in that date range.
 
+For example, the "Action Frequency" will have to parse through the all actions of each player, instead of being able to focus on specifically the actions listed in the query.  
+
 #### Case 2: Partitioning By Action Type - Player - Date
 
+With this partitioning schema the "Action Frequency" query will first find the partitions for only the action types in the query, and then for each player sub-partition will only read the data for the dates within the query's range. This partitioning schema allows the query engine to hone in and read only the data required to execute the query. 
 
+At the same time this partitioning scheme is designed to fit the queries criteria. If a different query is used, for example to find the location where each player was last seen, this partition schema would be of little help and the query engine would still have to read all the data for all the actions for all the players within the given date range. Understanding the types of queries and analysis you expect to be performed on the data, especially the attributes most likely to be used as filters, will help you design a partitioning schema to fit those queries.
 
-#### Case 3: Partitioning by Date - Player - Action Type
+------------------------------------
+
+# Have a Reprocessing Plan
+
+When working with a distributed system, the question isn't _if_ something will fail, it is _when_ will it fail.
