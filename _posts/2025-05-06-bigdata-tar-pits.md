@@ -1,20 +1,11 @@
 ---
 title: "Big Data Tar Pits"
 layout: post
-date: 2024-01-09
+date: 2025-05-06
 tags: big data, architecture, distributed computing, data processing
 ---
 
-# Outline
-
-- What is Big Data
-- Tar Pits
-    - [X] Data Partitioning
-    - [X] Reprocessing Plan
-    - [X] At Lease Once vs. At Most Once vs. Exactly Once
-    - [X] Time is an Illusion
-
-# What is Big Data
+## What is Big Data
 
 My personal definition of Big Data is:
 
@@ -99,7 +90,7 @@ At the same time this partitioning scheme is designed to fit the queries criteri
 
 ------------------------------------
 
-# Have a Reprocessing Plan
+## Have a Reprocessing Plan
 
 When working with a distributed system, the question isn't _if_ something will fail, it is _when_ will it fail. When processing a million events a day a "1 in a million" chance is a daily occurrence. Network connections will fail, hosts in your cluster will have storage issues, you will write and push buggy code. As a result trying to predict and react to every possible issue in a distributed data processing system is impractical. A much more practical approach is to have a data reprocessing plan, that will easily allow you to identify and remove any corrupted data and then re-submit your source data for processing by the system. Generally speaking a reprocessing plan, like automated testing, is much easier to build while the system is being defined and built instead of retroactively trying to create a re-processing plan for an already operational system. 
 
@@ -111,7 +102,7 @@ At once processing processing means that your system can't handle seeing the sam
 
 -------------------------------------
 
-# Ok, Now What?
+## Ok, Now What?
 
 Why write this? Because I have worked with distributed data processing systems that fallen into at leas of the tar pits above and resulted in significant time and cost to try and fix the issues those tar pits caused. Making this even worse getting a system out of any of those tar pits will come with even more costs, and might not be feasible without a significant re-design of the system. My hope is that this article will help you avoid falling into those tar pits.
 
