@@ -19,9 +19,9 @@ Logging in with a username and password is a universally well understood pattern
 
 ### The Problems With passwords
 
-**Password Resets:** Users regularly forget their passwords. The most common password reset mechanism is by sending a Magic Link to the email associated with the account. This pattern makes access to the email account a user credential. Essentially this is an Out-Of-Band Authenticator in NIST parlance. See: [NIST SP 800-63 B Section 5.1.3.1](https://pages.nist.gov/800-63-3/sp800-63b.html)
+**Password resets:** Users regularly forget their passwords. The most common password reset mechanism is by sending a Magic Link to the email associated with the account. This pattern makes access to the email account a user credential. Essentially this is an Out-Of-Band Authenticator in NIST parlance. See: [NIST SP 800-63 B Section 5.1.3.1](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
-**The password is sent to the server:* Sending the password to server means the server, and anyone who can control the server, has access to your raw password. 
+**The password is sent to the server:** Sending the password to server means the server, and anyone who can control the server, has access to your raw password. 
 
 If I can try a bunch of guess with the server letting me know if the password is correct or not, I might be able to guess your password.
 
@@ -33,7 +33,12 @@ If I can get on the path between you and the server, I can get your password bec
 
 The server stores the hashed password, along with the passwords for all the other users. This means if I can get a copy of that data, I have a fair chance at cracking the password of at least a few users.
 
-*Passwords are hard to remember:* As a result people tend to reuse their passwords, or an easy to recognize password patter. This means for a given user, if their password on service `A` is compromised, there is a good chance you will be able guess their password on service `B`.
+TODO: Add reference to how fast passwords can be cracked.
 
-The two issues of services having direct access to a users password, and users reusing their passwords, combine to make passwords particularly easy to compromise.
+**Passwords are hard to remember:** As a result people tend to reuse their passwords, or an easy to recognize password patter. This means for a given user, if their password on service `A` is compromised, there is a good chance you will be able guess their password on service `B`.
+
+The two issues of services having direct access to a users password, and users reusing their passwords, combine to make passwords particularly easy to compromise. As a result the Information Security world has been looking for an alternative to passwords for over a decade, or at the very least augment password with things like Multi-Factor Authentication (MFA) and [WebAuthN](https://www.w3.org/TR/webauthn-2/)
+
+## WebAuthN, Passkeys and Why They Suck
+
 
