@@ -1,6 +1,8 @@
 ---
 title: "The Boring Future of GenAI"
 layout: post
+date: 2025-09-05
+tags: genai, futurism, non-tech
 ---
 
 Today, most people use LLMs as an information lookup and generation system.  
