@@ -15,6 +15,8 @@ Today, most people use LLMs as an information lookup and generation system.
 
 Without some new breakthrough in AI that opens the door to AGI, we probably won’t get any novel answers when we ask ChatGPT how to monetize it.  
 
+<!--more-->
+
 So how do you monetize a publicly facing, free-to-use GenAI service like ChatGPT? Since history doesn’t repeat but often rhymes, we can look at what the previous generation of publicly facing, free-to-use information lookup services—search engines—did. The answer is obvious: advertising and promoted content. Where there is information, there is attention, and where there is attention, there is advertising.  
 
 It’s not hard to imagine someone asking about a workout plan and being nudged toward supplements or a gym membership to go with it. It’s also not hard to picture a vibe coder writing a web app and getting “helpful” suggestions about the three “best” hosting providers. Or an image generation system that ever-so-slightly prefers slipping in the Nike logo over the Adidas one. The degree of favoritism, of course, correlates with how much Nike and Adidas bid for logo placement. This is the kind of truly context-aware advertising that today’s marketers can only dream about.  

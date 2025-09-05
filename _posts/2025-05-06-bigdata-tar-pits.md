@@ -21,6 +21,8 @@ In essence "Big Data" is an ambiguous term that is generally understood to mean 
 
 Managing big data usually means designing a system that will allow for distributing the data, and the processing of the data, across multiple compute and storage nodes in a cluster aka a Distributed Data Processing System. Even if the exact mechanics of distributing the data and computation is abstracted behind a framework like [Hadoop](https://hadoop.apache.org/), [Spark](https://spark.apache.org/), or [Flink](https://flink.apache.org/) the distributed nature of the system needs to be taken into account. 
 
+<!--more-->
+
 The size (aka. Volume) and speed at which the data changes (aka Velocity) of a Big Data system usually break assumptions that are common in traditional applications. This means that you need to take on a different perspective when designing your apps. More importantly there are a couple tar pits people tend to fall into if they are not careful and I am hoping this post will help you avoid some of them.
 
 ## Tar Pits
