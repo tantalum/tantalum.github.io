@@ -11,7 +11,7 @@ Passwordless: The goal is to allow the user to authenticate them selves without 
 User: We are discussion human users as apposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
 Authentication: This architecture is focused on [Authenticating](https://en.wikipedia.org/wiki/Authentication), i.e. verifying, a user's identity.
 Consumer-facing: This is your run of the mill website where, today, users register with a username, email, and password. Users login by providing a username and password and are able to reset their password by requesting a magic link sent to their inbox. MFA might or might not be a requirement.
-Web application: The user is authentication to a web application hosted on the internet, as opposed to a locally running app or loggin into their personal device.
+Web application: The user is authentication to a web application hosted on the internet, as opposed to a locally running app or logging into their personal device.
 
 ## Current State: Passwords Have Eaten the Web
 
@@ -41,4 +41,10 @@ The two issues of services having direct access to a users password, and users r
 
 ## WebAuthN, Passkeys and Why They Suck
 
+TODO: Add Me
 
+## The Architecture
+
+### One User Multiple Credentials
+
+When designing an authentication system focused on single user password based logins, the most straight forward approach is to have a `users` table. This `users` table will generally have one column for the password hash and another column for the user's email address.  
