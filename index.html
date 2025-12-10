@@ -3,7 +3,7 @@ layout: default
 title: Circuits Of Imagination Blog
 ---
 
-{% for post in paginator.posts %}
+{% for post in site.posts %}
 <section class="coi-post-card">
   <div class="coi-post-card-title-container">
     <h1 class="coi-post-card-title">
@@ -18,23 +18,3 @@ title: Circuits Of Imagination Blog
   </div>
 </section>
 {% endfor %}
-
-<div class="coi-paginator-bar">
-    {% if paginator.previous_page %}
-    <div class="coi-paginator-previous">
-      <a href="{{ paginator.previous_page_path }}" class="coi-paginator-button coi-paginator-link">
-        <i class="fa fa-arrow-left"></i> Previous
-      </a>
-    </div>
-    {% else %}
-    <div class="coi-paginator-placeholder"></div>
-    {% endif %}
-
-    {% if paginator.next_page %}
-    <div class="coi-paginator-next">
-      <a href="{{ paginator.next_page_path }}" class="coi-paginator-button coi-paginator-link">
-        Next <i class="fa fa-arrow-right"></i>
-      </a>
-    </div>
-    {% endif %}
-</div>
