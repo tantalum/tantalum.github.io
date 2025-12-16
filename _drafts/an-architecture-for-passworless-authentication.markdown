@@ -7,11 +7,13 @@ layout: post
 
 This is a passwordless user authentication architecture for consumer-facing web applications. To break that down a little more:
 
-Passwordless: The goal is to allow the user to authenticate them selves without utilizing password.
+Passwordless: The goal is to allow the user to authenticate them selves without using or having to remember a password.
 User: We are discussion human users as apposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
 Authentication: This architecture is focused on [Authenticating](https://en.wikipedia.org/wiki/Authentication), i.e. verifying, a user's identity.
 Consumer-facing: This is your run of the mill website where, today, users register with a username, email, and password. Users login by providing a username and password and are able to reset their password by requesting a magic link sent to their inbox. MFA might or might not be a requirement.
-Web application: The user is authentication to a web application hosted on the internet, as opposed to a locally running app or logging into their personal device.
+Web application: The user is authenticating to a web application hosted on the internet, as opposed to a locally running app or logging into a personal device like your phone or computer.
+
+<!--more-->
 
 ## Current State: Passwords Have Eaten the Web
 
@@ -41,7 +43,13 @@ The two issues of services having direct access to a users password, and users r
 
 ## WebAuthN, Passkeys and Why They Suck
 
-TODO: Add Me
+First for some definitions:
+
+- *Public Key Credential:* A public key that is associated with an account. A user authenticates by proving access to the private key associated with the public key credential. 
+- *[WebAuthN](https://www.w3.org/TR/webauthn-2/):* Is a browser API for creating a utilizing a public key credential.
+- *[Passkey])(https://www.passkeys.com/what-are-passkeys.html):* A public key credential that is compatible with WebAuthN.
+
+TODO: The problems with Passkeys
 
 ## The Architecture
 
