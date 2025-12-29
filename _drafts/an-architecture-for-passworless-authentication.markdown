@@ -19,9 +19,9 @@ Web application: The user is authenticating to a web application hosted on the i
 
 Logging in with a username and password is a universally well understood pattern for users. Users like being able to log into a website using a username and password because is familiar. Additionally, passwords are portable: If user gets a new device and needs to log into a service, all they have to do is type in their username and password.
 
-### The Problems With passwords
+### The Problems With Passwords
 
-**Password resets:** Users regularly forget their passwords. The most common password reset mechanism is by sending a Magic Link to the email associated with the account. This pattern makes access to the email account a user credential. Essentially this is an Out-Of-Band Authenticator in NIST parlance. See: [NIST SP 800-63 B Section 5.1.3.1](https://pages.nist.gov/800-63-3/sp800-63b.html)
+**Password resets:** Users regularly forget their passwords. The most common password reset mechanism is by sending a Magic Link to the email associated with the account. This pattern effectively makes access to the email account a user credential. Essentially this is an Out-Of-Band Authenticator in NIST parlance. See: [NIST SP 800-63 B Section 5.1.3.1](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
 **The password is sent to the server:** Sending the password to server means the server, and anyone who can control the server, has access to your raw password. 
 
@@ -35,7 +35,7 @@ If I can get on the path between you and the server, I can get your password bec
 
 The server stores the hashed password, along with the passwords for all the other users. This means if I can get a copy of that data, I have a fair chance at cracking the password of at least a few users.
 
-TODO: Add reference to how fast passwords can be cracked.
+<!-- TODO: Add reference to how fast passwords can be cracked. -->
 
 **Passwords are hard to remember:** As a result people tend to reuse their passwords, or an easy to recognize password patter. This means for a given user, if their password on service `A` is compromised, there is a good chance you will be able guess their password on service `B`.
 
@@ -49,7 +49,13 @@ First for some definitions:
 - *[WebAuthN](https://www.w3.org/TR/webauthn-2/):* Is a browser API for creating a utilizing a public key credential.
 - *[Passkey])(https://www.passkeys.com/what-are-passkeys.html):* A public key credential that is compatible with WebAuthN.
 
-TODO: The problems with Passkeys
+### The Problems with Passkeys
+
+- Passkeys are tied to a device, if you lose your device you lose your credentials
+- Passkeys can't be transferred across devices. If you need to login with a new device, you might need access to your old device.
+- Passkeys registration and authentication is a little more complex, from a technical perspective, than password based authentication. 
+- Lets face it: Passkeys are a new technology and we are still figuring some of this stuff out.
+<!-- TODO: Is this a comprehensive list -->
 
 ## The Architecture
 
