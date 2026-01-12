@@ -47,13 +47,14 @@ First for some definitions:
 
 - *Public Key Credential:* A public key that is associated with an account. A user authenticates by proving access to the private key associated with the public key credential. 
 - *[WebAuthN](https://www.w3.org/TR/webauthn-2/):* Is a browser API for creating a utilizing a public key credential.
-- *[Passkey])(https://www.passkeys.com/what-are-passkeys.html):* A public key credential that is compatible with WebAuthN.
+- *[Passkey](https://www.passkeys.com/what-are-passkeys.html):* A public key credential that is compatible with WebAuthN.
 
 ### The Problems with Passkeys
 
 - Passkeys are tied to a device, if you lose your device you lose your credentials
 - Passkeys can't be transferred across devices. If you need to login with a new device, you might need access to your old device.
 - Passkeys registration and authentication is a little more complex, from a technical perspective, than password based authentication. 
+- Users are used to passwords, and people like what is familiar.
 - Lets face it: Passkeys are a new technology and we are still figuring some of this stuff out.
 <!-- TODO: Is this a comprehensive list -->
 
@@ -61,4 +62,45 @@ First for some definitions:
 
 ### One User Multiple Credentials
 
-When designing an authentication system focused on single user password based logins, the most straight forward approach is to have a `users` table. This `users` table will generally have one column for the password hash and another column for the user's email address.  
+When designing an authentication system focused on single user password based logins, the most straight forward approach is to have a `users` table. This `users` table will generally have one column for the password hash and another column for the user's email address. The main purpose of the email field is to sometimes serve as the username, and mainly to store the email used when the user forgets their password.  This is a relatively simplistic and naive implementation, but is in fact how many web authentication systems are designed.
+
+<!-- TODO: Reference real world examples --> 
+
+A more nimble, but more complex, approach is to have multiple credentials of different types associated with a user. Password, MFA tokens and passkeys all become credentials associated with a user. Once we have different credentials of different types associated to a user, we can ditch the password and let the user authenticate with any of the valid credentials. 
+
+### The Entities
+
+#### A User
+
+This is the typical "user" entity found in most web applications. In this context a user is an entity that can be authenticated. 
+
+#### A Credential
+
+A credential is an authentication mechanism and associated data. For example a passkey credential and the associated public key, or a password credential and the hashed password. A user's credential's should be unique, as in a single user should not have two credentials of the same type and authentication data. For example a user shouldn't have to passkey credentials with the public key.
+
+### The Flows
+
+#### Registration
+
+The registration flow is very similar to the typical user registration flow for any password-based authentication system, except instead of submitting an email and password the user submits and email and a passkey public key credential.
+
+During registration the submits the information defining the user, including the initial credential data. For this design we will assume two credentials are provided on registration: 
+
+* An email credential
+* A passkey credential
+
+<!-- TODO: Sequence Diagram -->
+<!-- TODO: Email verification -->
+
+#### Email Verification
+
+Send an email with a code, user must open the link to verify the email address. 
+
+#### Passkey Login
+
+The standard WebAuthN login flow.
+
+#### Magic Link Login
+
+Allows the user to login using to the registered email as a credential. 
+
