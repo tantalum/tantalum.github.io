@@ -5,7 +5,7 @@ layout: post
 
 ## Background and Scope: Who is This For
 
-This is a passwordless user authentication architecture for consumer-facing web applications. To break that down a little more:
+This post describes an architecture passwordless user authentication for consumer-facing web applications. To break that down a little more:
 
 Passwordless: The goal is to allow the user to authenticate them selves without using or having to remember a password.
 User: We are discussion human users as apposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
@@ -37,7 +37,7 @@ The server stores the hashed password, along with the passwords for all the othe
 
 <!-- TODO: Add reference to how fast passwords can be cracked. -->
 
-**Passwords are hard to remember:** As a result people tend to reuse their passwords, or an easy to recognize password patter. This means for a given user, if their password on service `A` is compromised, there is a good chance you will be able guess their password on service `B`.
+**Passwords are hard to remember:** As a result people tend to reuse their passwords, or an easy to recognize password pattern. This means for a given user, if their password on service `A` is compromised, there is a good chance you will be able guess their password on service `B`.
 
 The two issues of services having direct access to a users password, and users reusing their passwords, combine to make passwords particularly easy to compromise. As a result the Information Security world has been looking for an alternative to passwords for over a decade, or at the very least augment password with things like Multi-Factor Authentication (MFA) and [WebAuthN](https://www.w3.org/TR/webauthn-2/)
 
@@ -52,7 +52,7 @@ First for some definitions:
 ### The Problems with Passkeys
 
 - Passkeys are tied to a device, if you lose your device you lose your credentials
-- Passkeys can't be transferred across devices. If you need to login with a new device, you might need access to your old device.
+- Passkeys can't be transferred across devices. If you need to login with a new device, you might need to access to your old device.
 - Passkeys registration and authentication is a little more complex, from a technical perspective, than password based authentication. 
 - Users are used to passwords, and people like what is familiar.
 - Lets face it: Passkeys are a new technology and we are still figuring some of this stuff out.
@@ -76,7 +76,12 @@ This is the typical "user" entity found in most web applications. In this contex
 
 #### A Credential
 
-A credential is an authentication mechanism and associated data. For example a passkey credential and the associated public key, or a password credential and the hashed password. A user's credential's should be unique, as in a single user should not have two credentials of the same type and authentication data. For example a user shouldn't have to passkey credentials with the public key.
+A credential is an authentication mechanism and associated data. For example a passkey credential and the associated public key, or a password credential and the hashed password. A user's credential's should be unique, as in a single user should not have two credentials of the same type and authentication data. For example a user shouldn't have two passkey credentials with the same public key.
+
+For our use case we are going to define two types of credentials:
+
+1. A Passkey Credential: A passkey credential contains an ID and a public key
+2. An Email Credential: An email credentials contains and ID and a verified email address.
 
 ### The Flows
 
@@ -89,8 +94,23 @@ During registration the submits the information defining the user, including the
 * An email credential
 * A passkey credential
 
-<!-- TODO: Sequence Diagram -->
-<!-- TODO: Email verification -->
+<pre class="mermaid">
+sequenceDiagram
+    actor User
+    participant Server
+    participant DB@{ "type": "database", "alias": "User Database"}
+    participant EmailServer@{ "alias": "Email Server"}
+    User->>Server: Registration data including public key and email address
+    activate Server
+    Server->>DB: Store user data and credentials
+    Server->>EmailServer: Send email address verification
+    Server->>User: Registration confirmation
+    deactivate Server
+    User->>Server: Confirms email address
+    activate Server
+    Server->>User: Registration complete
+    deactivate Server
+</pre>
 
 #### Email Verification
 
@@ -104,3 +124,7 @@ The standard WebAuthN login flow.
 
 Allows the user to login using to the registered email as a credential. 
 
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+</script>
