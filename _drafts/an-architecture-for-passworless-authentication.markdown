@@ -74,6 +74,13 @@ A more nimble, but more complex, approach is to have multiple credentials of dif
 
 This is the typical "user" entity found in most web applications. In this context a user is an entity that can be authenticated. 
 
+<pre class="mermaid">
+classDiagram
+    class User {
+        +id
+    }
+</pre>
+
 #### A Credential
 
 A credential is an authentication mechanism and associated data. For example a passkey credential and the associated public key, or a password credential and the hashed password. A user's credential's should be unique, as in a single user should not have two credentials of the same type and authentication data. For example a user shouldn't have two passkey credentials with the same public key.
@@ -82,6 +89,28 @@ For our use case we are going to define two types of credentials:
 
 1. A Passkey Credential: A passkey credential contains an ID and a public key
 2. An Email Credential: An email credentials contains and ID and a verified email address.
+
+<!-- NOTE: Should valid be a more generic "state"? -->
+
+<pre class="mermaid">
+classDiagram
+    Credential -- User
+    User : +id ID
+    class Credential {
+        +id ID
+        +User user
+        +boolean valid
+    }
+    class PasskeyCredential {
+        +PublicKey publicKey
+    }
+    class EmailCredential {
+        +String emailAddress
+    }
+    Credential <|-- EmailCredential
+    Credential <|-- PasskeyCredential
+
+</pre>
 
 ### The Flows
 
@@ -115,6 +144,24 @@ sequenceDiagram
 #### Email Verification
 
 Send an email with a code, user must open the link to verify the email address. 
+
+<pre class="mermaid">
+sequenceDiagram
+    actor User
+    participant Server
+    participant DB@{ "type": "database", "alias": "User Database"}
+    participant EmailServer@{ "alias": "Email Server"}
+    User->>Server: Registration data including public key and email address
+    activate Server
+    Server->>DB: Store user data and credentials
+    Server->>EmailServer: Send email address verification
+    Server->>User: Registration confirmation
+    deactivate Server
+    User->>Server: Confirms email address
+    activate Server
+    Server->>User: Registration complete
+    deactivate Server
+</pre>
 
 #### Passkey Login
 
