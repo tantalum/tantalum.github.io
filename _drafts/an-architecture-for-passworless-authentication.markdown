@@ -134,32 +134,32 @@ sequenceDiagram
     Server->>DB: Store user data and credentials
     Server->>EmailServer: Send email address verification
     Server->>User: Registration confirmation
+    Note right of Server: All credentials are invalid since registration is not yet complete
     deactivate Server
     User->>Server: Confirms email address
     activate Server
     Server->>User: Registration complete
+    Note right of Server: Credentials are valid and user can login
     deactivate Server
 </pre>
 
 #### Email Verification
 
-Send an email with a code, user must open the link to verify the email address. 
+The email verification flow is used to validate that the user has access to the email address provided. This flow us used during registration to establish the initial Email Credential and any time the user wants to modify, or add, an Email Credential.
 
 <pre class="mermaid">
 sequenceDiagram
     actor User
     participant Server
-    participant DB@{ "type": "database", "alias": "User Database"}
     participant EmailServer@{ "alias": "Email Server"}
     User->>Server: Registration data including public key and email address
     activate Server
-    Server->>DB: Store user data and credentials
     Server->>EmailServer: Send email address verification
-    Server->>User: Registration confirmation
+    Server->>User: Success message
     deactivate Server
     User->>Server: Confirms email address
     activate Server
-    Server->>User: Registration complete
+    Server->>User: Email verified
     deactivate Server
 </pre>
 
@@ -170,6 +170,27 @@ The standard WebAuthN login flow.
 #### Magic Link Login
 
 Allows the user to login using to the registered email as a credential. 
+
+<pre class="mermaid">
+sequenceDiagram
+    actor User
+    participant Server
+    participant DB@{ "type": "database", "alias": "User Database"}
+    participant EmailServer@{ "alias": "Email Server"}
+    User->>Server: Requests login with Magic Link
+    activate Server
+    Server->>EmailServer: Send email address verification
+    Server->>User: Notify user to check email
+    deactivate Server
+    User->>Server: Clicks Link
+    activate Server
+    alt Link valid
+    	Server->>User: Login Successful
+    else Link invalid
+    	Server->>User: Login Unsuccessful
+    end
+    deactivate Server
+</pre>
 
 <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
