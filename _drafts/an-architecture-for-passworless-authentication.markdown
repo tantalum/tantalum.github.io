@@ -7,21 +7,27 @@ layout: post
 
 This post describes an architecture passwordless user authentication for consumer-facing web applications. To break that down a little more:
 
-Passwordless: The goal is to allow the user to authenticate them selves without using or having to remember a password.
-User: We are discussion human users as apposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
-Authentication: This architecture is focused on [Authenticating](https://en.wikipedia.org/wiki/Authentication), i.e. verifying, a user's identity.
-Consumer-facing: This is your run of the mill website where, today, users register with a username, email, and password. Users login by providing a username and password and are able to reset their password by requesting a magic link sent to their inbox. MFA might or might not be a requirement.
-Web application: The user is authenticating to a web application hosted on the internet, as opposed to a locally running app or logging into a personal device like your phone or computer.
+*Passwordless:* The goal is to allow the user to authenticate them selves without using or having to remember a password.
+
+*User:* We are discussion human users as apposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
+
+*Authentication:* This architecture is focused on [Authenticating](https://en.wikipedia.org/wiki/Authentication), i.e. verifying, a user's identity.
+
+*Consumer-facing:* This is your run of the mill website where, today, users register with a username, email, and password. Users login by providing a username and password and are able to reset their password by requesting a magic link sent to their inbox. MFA might or might not be a requirement.
+
+*Web application:* The user is authenticating to a web application hosted on the internet, as opposed to a locally running app or logging into a personal device like your phone or computer.
 
 <!--more-->
 
+This architecture is indented to describe a framework for authenticating users to a web application. This architecture doesn't describe other facets of user management such as [authorization](https://en.wikipedia.org/wiki/Authorization) or user roles. Neither does this architecture describe a full security architecture such as rate limiting, credential expiration or access and refresh token management. Although this architecture has all the components for [MFA](https://en.wikipedia.org/wiki/Multi-factor_authentication), we will focus on single factor authentication and will consider MFA out of scope. 
+
 ## Current State: Passwords Have Eaten the Web
 
-Logging in with a username and password is a universally well understood pattern for users. Users like being able to log into a website using a username and password because is familiar. Additionally, passwords are portable: If user gets a new device and needs to log into a service, all they have to do is type in their username and password.
+Logging in with a username and password is a universally well understood and familiar UX pattern for users. Additionally, passwords are portable: If user gets a new device and needs to log into a service, all they have to do is type in their username and password.
 
 ### The Problems With Passwords
 
-**Password resets:** Users regularly forget their passwords. The most common password reset mechanism is by sending a Magic Link to the email associated with the account. This pattern effectively makes access to the email account a user credential. Essentially this is an Out-Of-Band Authenticator in NIST parlance. See: [NIST SP 800-63 B Section 5.1.3.1](https://pages.nist.gov/800-63-3/sp800-63b.html)
+**Password resets:** Users regularly forget their passwords. The most common password reset mechanism is by sending a Magic Link to the email associated with the account. In effect, this pattern makes access to the email account a user credential. This is an Out-Of-Band Authenticator in NIST parlance. See: [NIST SP 800-63 B Section 5.1.3.1](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
 **The password is sent to the server:** Sending the password to server means the server, and anyone who can control the server, has access to your raw password. 
 
@@ -94,7 +100,7 @@ For our use case we are going to define two types of credentials:
 
 <pre class="mermaid">
 classDiagram
-    Credential -- User
+    Credential --> User
     User : +id ID
     class Credential {
         +id ID
@@ -111,6 +117,9 @@ classDiagram
     Credential <|-- PasskeyCredential
 
 </pre>
+
+<!-- TODO: Email Verification Request -->
+<!-- TODO: Magic Link Authentication Request -->
 
 ### The Flows
 
