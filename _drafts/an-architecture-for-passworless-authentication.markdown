@@ -83,7 +83,7 @@ This is the typical "user" entity found in most web applications. In this contex
 <pre class="mermaid">
 classDiagram
     class User {
-        +id
+        +id ID
     }
 </pre>
 
@@ -118,8 +118,29 @@ classDiagram
 
 </pre>
 
+#### An Authetication Challenge
+
+Whenever a user wants to authenticate to the app, the user needs to provide the correct response to a given challenge. For example when authenticating using a Passkey the user needs to respond to the challenge by siging the challenge with the private key associated with the passkey proving access to the private key. When attempting to authenticate via email, the user needs to provide the secret code sent to the email proving access to the email address. In this second case the secret code is part of the challenge.
+
+<pre class="mermaid">
+classDiagram
+    class AuthenticationChallenge {
+        +id ID
+        +Timestamp expiration
+        +Credential credential
+    }
+    class MagicLinkChallenge {
+        +String nonce
+    }
+    class PasskeyChallenge {
+        +String nonce
+    }
+    AuthenticationChallenge <|-- MagicLinkChallenge
+    AuthenticationChallenge <|-- PasskeyChallenge
+
+</pre>
+
 <!-- TODO: Email Verification Request -->
-<!-- TODO: Magic Link Authentication Request -->
 
 ### The Flows
 
@@ -172,13 +193,15 @@ sequenceDiagram
     deactivate Server
 </pre>
 
-#### Passkey Login
+#### Passkey Authentication
 
 The standard WebAuthN login flow.
 
-#### Magic Link Login
+#### Magic Link Authentication
 
-Allows the user to login using to the registered email as a credential. 
+Allows the user to login using to the registered email as a credential. When sending the link to the user the link should contain the nonce, and the server will lookup the challenge using the nonce. If the challenge is found and valid, the user can be authenticated. If the nonce is not found, or the challenge associated with the nonce is not longer valid, authentication is denined and the user is provided an error message. 
+
+[User enumeration](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/03-Identity_Management_Testing/04-Testing_for_Account_Enumeration_and_Guessable_User_Account) is an important consideration here, especially when responding to the user after the Magic Link is requested. Most applications will respond to that request letting the requester know to either check their email address, or that the email address was invalid. This type of message easily allows an attacker to determine if a given email address has an account on the app or not. Instead apps should respond with a generic message letting the user know that if their email address was valid a magic link will be sent, and providing the same response when requesting a magic link regardless of whether the address was valid or not.
 
 <pre class="mermaid">
 sequenceDiagram
@@ -188,12 +211,17 @@ sequenceDiagram
     participant EmailServer@{ "alias": "Email Server"}
     User->>Server: Requests login with Magic Link
     activate Server
-    Server->>EmailServer: Send email address verification
+    Server->>DB: Create Magic Link Challenge
+    DB->>Server: Challenge created
+    Server->>EmailServer: Send magic link with nonce
     Server->>User: Notify user to check email
     deactivate Server
     User->>Server: Clicks Link
     activate Server
+    Server->>DB: Retrieve Magic Link Challenge
+    DB->>Server: Provide Magic Link Challenge
     alt Link valid
+        Server->>DB: Set challenge as invalid since it was already used
     	Server->>User: Login Successful
     else Link invalid
     	Server->>User: Login Unsuccessful
