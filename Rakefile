@@ -25,7 +25,7 @@ task :create_draft, [:title] do |t, args|
 
   # generate a unique filename appending a number
   i = 1
-  while File.exists?($post_dir + filename) do
+  while File.exist?($post_dir + filename) do
     filename = File.basename(slugify(post_title)) + "-" + i.to_s + $post_ext 
     i += 1
   end
