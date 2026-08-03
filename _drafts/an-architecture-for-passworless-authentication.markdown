@@ -7,11 +7,11 @@ layout: post
 
 This post describes an architecture passwordless user authentication for consumer-facing web applications. To break that down a little more:
 
-*Passwordless:* The goal is to allow the user to authenticate them selves without using or having to remember a password.
+*Passwordless:* The goal is to allow the user to log into a web site without using or having to remember a password.
 
-*User:* We are discussion human users as apposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
+*User:* We are focused on human users as apposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
 
-*Authentication:* This architecture is focused on [Authenticating](https://en.wikipedia.org/wiki/Authentication), i.e. verifying, a user's identity.
+*Authentication:* This architecture is focused on [Authenticating](https://en.wikipedia.org/wiki/Authentication), i.e. verifying, a user's identity. This is oppose to [Authorization](https://en.wikipedia.org/wiki/Authorization), i.e. defining what a user is and isn't allowed to do.
 
 *Consumer-facing:* This is your run of the mill website where, today, users register with a username, email, and password. Users login by providing a username and password and are able to reset their password by requesting a magic link sent to their inbox. MFA might or might not be a requirement.
 
@@ -27,7 +27,7 @@ Logging in with a username and password is a universally well understood and fam
 
 ### The Problems With Passwords
 
-**Password resets:** Users regularly forget their passwords. The most common password reset mechanism is by sending a Magic Link to the email associated with the account. In effect, this pattern makes access to the email account a user credential. This is an Out-Of-Band Authenticator in NIST parlance. See: [NIST SP 800-63 B Section 5.1.3.1](https://pages.nist.gov/800-63-3/sp800-63b.html)
+**Password resets:** Users regularly forget their passwords. The most common password reset mechanism is by sending a Magic Link to the email associated with the account. In effect, this pattern makes access to the email account a user credential. This is an Out-Of-Band Authenticator in NIST parlance. See: [NIST SP 800-63 B Section 5.1.3.1](https://pages.nist.gov/800-63-3/sp800-63b.html).
 
 **The password is sent to the server:** Sending the password to server means the server, and anyone who can control the server, has access to your raw password. 
 
@@ -45,7 +45,7 @@ The server stores the hashed password, along with the passwords for all the othe
 
 **Passwords are hard to remember:** As a result people tend to reuse their passwords, or an easy to recognize password pattern. This means for a given user, if their password on service `A` is compromised, there is a good chance you will be able guess their password on service `B`.
 
-The two issues of services having direct access to a users password, and users reusing their passwords, combine to make passwords particularly easy to compromise. As a result the Information Security world has been looking for an alternative to passwords for over a decade, or at the very least augment password with things like Multi-Factor Authentication (MFA) and [WebAuthN](https://www.w3.org/TR/webauthn-2/)
+The two issues of services having direct access to a users password, and users reusing their passwords, combine to make passwords particularly easy to compromise. As a result the Information Security world has been looking for an alternative to passwords for over a decade, or at the very least augment password with things like Multi-Factor Authentication (MFA) and [WebAuthN](https://www.w3.org/TR/webauthn-2/).
 
 ## WebAuthN, Passkeys and Why They Suck
 
@@ -61,14 +61,13 @@ First for some definitions:
 - Passkeys can't be transferred across devices. If you need to login with a new device, you might need to access to your old device.
 - Passkeys registration and authentication is a little more complex, from a technical perspective, than password based authentication. 
 - Users are used to passwords, and people like what is familiar.
-- Lets face it: Passkeys are a new technology and we are still figuring some of this stuff out.
 <!-- TODO: Is this a comprehensive list -->
 
 ## The Architecture
 
 ### One User Multiple Credentials
 
-When designing an authentication system focused on single user password based logins, the most straight forward approach is to have a `users` table. This `users` table will generally have one column for the password hash and another column for the user's email address. The main purpose of the email field is to sometimes serve as the username, and mainly to store the email used when the user forgets their password.  This is a relatively simplistic and naive implementation, but is in fact how many web authentication systems are designed.
+When designing an authentication system focused on single user password based logins, the most straight forward approach is to have a `users` table. This `users` table will generally have one column for the password hash and another column for the user's email address. The main purpose of the email field is to sometimes serve as the username, and mainly to store the email to send a password resent link to when the user forgets their password.  This is a relatively simplistic and naive implementation, but is in fact how many web authentication systems are designed.
 
 <!-- TODO: Reference real world examples --> 
 
@@ -89,7 +88,7 @@ classDiagram
 
 #### A Credential
 
-A credential is an authentication mechanism and associated data. For example a passkey credential and the associated public key, or a password credential and the hashed password. A user's credential's should be unique, as in a single user should not have two credentials of the same type and authentication data. For example a user shouldn't have two passkey credentials with the same public key.
+A credential is an authentication mechanism and associated data. For example a passkey credential and the associated public key, or a password credential and the hashed password. A user's credentials should be unique, as in a single user should not have two credentials of the same type and authentication data. For example a user shouldn't have two passkey credentials with the same public key.
 
 For our use case we are going to define two types of credentials:
 
@@ -100,8 +99,6 @@ For our use case we are going to define two types of credentials:
 
 <pre class="mermaid">
 classDiagram
-    Credential --> User
-    User : +id ID
     class Credential {
         +id ID
         +User user
@@ -118,7 +115,7 @@ classDiagram
 
 </pre>
 
-#### An Authetication Challenge
+#### An Authentication Challenge
 
 Whenever a user wants to authenticate to the app, the user needs to provide the correct response to a given challenge. For example when authenticating using a Passkey the user needs to respond to the challenge by siging the challenge with the private key associated with the passkey proving access to the private key. When attempting to authenticate via email, the user needs to provide the secret code sent to the email proving access to the email address. In this second case the secret code is part of the challenge.
 
@@ -146,12 +143,14 @@ classDiagram
 
 #### Registration
 
-The registration flow is very similar to the typical user registration flow for any password-based authentication system, except instead of submitting an email and password the user submits and email and a passkey public key credential.
+The registration flow is very similar to the typical user registration flow for any password-based authentication system. The main difference is instead of submitting an email and password, the user submits and email and a passkey public key credential.
 
-During registration the submits the information defining the user, including the initial credential data. For this design we will assume two credentials are provided on registration: 
+During registration the user submits the information defining the user, including the initial credential data. For this design we will assume two credentials are provided on registration: 
 
 * An email credential
 * A passkey credential
+
+In our registration flow, we will not consider registration complete until the user has validated the email address the submitted.
 
 <pre class="mermaid">
 sequenceDiagram
@@ -181,14 +180,18 @@ The email verification flow is used to validate that the user has access to the 
 sequenceDiagram
     actor User
     participant Server
+    participant DB@{ "type": "database", "alias": "Database"}
     participant EmailServer@{ "alias": "Email Server"}
-    User->>Server: Registration data including public key and email address
+    User->>Server: New Email Credential data
     activate Server
+    Server->>DB: Store email credential data. Credential is invalid.
+    Note right of Server: New Email Credential is still invalid util user verifies email. 
     Server->>EmailServer: Send email address verification
     Server->>User: Success message
     deactivate Server
-    User->>Server: Confirms email address
+    User->>Server: Confirms email address by clicking on the link
     activate Server
+    Server->>DB: Update Email Credential and mark it as valid.
     Server->>User: Email verified
     deactivate Server
 </pre>
@@ -233,3 +236,7 @@ sequenceDiagram
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
     mermaid.initialize({ startOnLoad: true });
 </script>
+
+## Glossary 
+
+*Credential:* Evidence the user provides to prove their identity or right to access a given service. See [https://csrc.nist.gov/glossary/term/credential](https://csrc.nist.gov/glossary/term/credential)
