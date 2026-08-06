@@ -198,7 +198,28 @@ sequenceDiagram
 
 #### Passkey Authentication
 
-The standard WebAuthN login flow.
+This would be the standard [WebAuthN Authentication Flow](https://www.w3.org/TR/webauthn-3/#sctn-sample-authentication).
+
+<pre class="mermaid">
+sequenceDiagram
+    actor User
+    participant Server
+    participant DB@{ "type": "database", "alias": "User Database"}
+    User->>Server: Requests login with Passkey
+    activate Server
+    Server->>DB: Create Passkey Challenge
+    DB->>Server: Challenge created
+    Server->>User: Challenge nonce
+    User->>Server: Signed challenge response
+    Server->>DB: Get associated Passkey Challenge
+    alt Challenge and Signatire Valid
+        Server->>DB: Set challenge as invalid since it was already used
+    	Server->>User: Login Successful
+    else Challenge or signature invalid
+    	Server->>User: Login Unsuccessful
+    end
+    deactivate Server
+</pre>
 
 #### Magic Link Authentication
 
@@ -237,6 +258,6 @@ sequenceDiagram
     mermaid.initialize({ startOnLoad: true });
 </script>
 
-## Glossary 
+## Why All This
 
-*Credential:* Evidence the user provides to prove their identity or right to access a given service. See [https://csrc.nist.gov/glossary/term/credential](https://csrc.nist.gov/glossary/term/credential)
+Passwords continue to be a weak link in the web security framework. Breach after breach dump millions of users passwords every couple of months. The architecture described above isn't just about using WebAuthN and Passkeys, it's about creating a versatile framework to support different authentication mechanisms allowing us to move beyond passwords to more secure login options.
