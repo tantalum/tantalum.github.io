@@ -258,6 +258,26 @@ sequenceDiagram
     mermaid.initialize({ startOnLoad: true });
 </script>
 
+## User Journeys
+
+Since we have the basic entities and flows defined, lets take a look and see how they fit together from a users perspective.
+
+## New User Registration
+
+Registering as a new user follows the [registration flow](#registration) above. Part of the user registration process will be following the [WebAuthN User-Verifying Authenticator](https://www.w3.org/TR/webauthn-3/#sctn-sample-registration-with-platform-authenticator) registration flow to create the appropriate Public Key credential.
+
+After the user submits the registration data to the server, the server will send an email to the user for them to verify their email address. Registration is not considered complete until a user has verified their email address because a valid email address credential is required when logging in from a new device.
+
+One major issue to consider is how the system should react if a user loses their email address verification message. The system will need a way for the user to recover from that case. One option is to delete the incomplete users data if their email address is not verified within a given time frame. This will allow the user to re-attempt registration after a given period if they lose their verification message.
+
+Another option is to allow a user to re-register using the same email address if the email address hasn't been verified yet, including send a new email verification message. However this approach opens up the door for a timing attack where a user registers with an email address and a given passkey, and then an attacker immediately registers again with the same email address but using a passkey under the attackers control before the users has confirmed their email address. An unaware user might complete the registration process not knowing they just added an attacker-controlled credential to their account.
+
+## User Login
+
+## User Login from New Device
+
+
+
 ## Why All This
 
 Passwords continue to be a weak link in the web security framework. Breach after breach dump millions of users passwords every couple of months. The architecture described above isn't just about using WebAuthN and Passkeys, it's about creating a versatile framework to support different authentication mechanisms allowing us to move beyond passwords to more secure login options.
