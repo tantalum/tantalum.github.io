@@ -253,16 +253,38 @@ sequenceDiagram
     deactivate Server
 </pre>
 
-<script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true });
-</script>
+#### Add New Passkey Credential
+
+Users need to edit their credentials. For passkeys there are two main operations: Delete a credential, which is a simple operation we won't explicitly spell out; And adding a new credential which is outline here. This is essentially the [WebAuthN User-Verifying Authenticator](https://www.w3.org/TR/webauthn-3/#sctn-sample-registration-with-platform-authenticator) process. 
+
+<pre class="mermaid">
+sequenceDiagram
+    actor User
+    participant Server
+    participant DB@{ "type": "database", "alias": "User Database"}
+    User->>Server: Requests adding a new Passkey Credential
+    activate Server
+    Note right of Server: Validate that the user is already authenticated
+    Server->>DB: Create Passkey Challenge
+    DB->>Server: Challenge created
+    Server->>User: Challenge nonce + Creation options
+    User->>Server: Signed challenge response + Public Key
+    Server->>DB: Get associated Passkey Challenge
+    alt Challenge and Signatire Valid
+        Server->>DB: Set challenge as invalid since it was already used
+        Server->>DB: Store new validated Passkey Credential
+    	Server->>User: New credential added
+    else Challenge or signature invalid
+    	Server->>User: Error adding credential
+    end
+    deactivate Server
+</pre>
 
 ## User Journeys
 
 Since we have the basic entities and flows defined, lets take a look and see how they fit together from a users perspective.
 
-## New User Registration
+### New User Registration
 
 Registering as a new user follows the [registration flow](#registration) above. Part of the user registration process will be following the [WebAuthN User-Verifying Authenticator](https://www.w3.org/TR/webauthn-3/#sctn-sample-registration-with-platform-authenticator) registration flow to create the appropriate Public Key credential.
 
@@ -272,12 +294,22 @@ One major issue to consider is how the system should react if a user loses their
 
 Another option is to allow a user to re-register using the same email address if the email address hasn't been verified yet, including send a new email verification message. However this approach opens up the door for a timing attack where a user registers with an email address and a given passkey, and then an attacker immediately registers again with the same email address but using a passkey under the attackers control before the users has confirmed their email address. An unaware user might complete the registration process not knowing they just added an attacker-controlled credential to their account.
 
-## User Login
+### User Login
 
-## User Login from New Device
+After a user has completed the registration process, the next thing they would want to do is login. In this case we are going to assume the user is going to login with the Passkey credential they created during registration. In this case the user would simply follow the [passkey authentication](#passkey-authentication) flow above. 
 
+### User Login from New Device
 
+Now the user wants to login using a new device, or in other words they want to login without access to any valid passkey credentials. This is where the [magic link authentication](#magic-link-authentication) flow comes into play. The working assumption here is that the user has access to their email from the device they want to login from. The user would use the magic link authentication flow to login, and then use [add new passkey](#add-new-passkey-credeitial) flow to add a new Passkey Credential that is accessible from their new device.
 
 ## Why All This
 
 Passwords continue to be a weak link in the web security framework. Breach after breach dump millions of users passwords every couple of months. The architecture described above isn't just about using WebAuthN and Passkeys, it's about creating a versatile framework to support different authentication mechanisms allowing us to move beyond passwords to more secure login options.
+
+<!-- --------------------------------------------- -->
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+</script>
+
