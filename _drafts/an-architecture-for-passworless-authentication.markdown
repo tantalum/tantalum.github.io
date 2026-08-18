@@ -5,7 +5,7 @@ layout: post
 
 ## Background and Scope: Who is This For
 
-This post describes an architecture passwordless user authentication for consumer-facing web applications. To break that down a little more:
+This post describes an architecture for passwordless user authentication for consumer-facing web applications. To break that down a little more:
 
 *Passwordless:* The goal is to allow the user to log into a web site without using or having to remember a password.
 
@@ -23,7 +23,7 @@ This architecture is indented to describe a framework for authenticating users t
 
 ## Current State: Passwords Have Eaten the Web
 
-Logging in with a username and password is a universally well understood and familiar UX pattern for users. Additionally, passwords are portable: If user gets a new device and needs to log into a service, all they have to do is type in their username and password.
+Logging in with a username and password is a universally well understood and familiar UX pattern for users Passwords are portable, if user gets a new device and needs to log into a service all they have to do is type in their username and password no matter what device they are using. Passwords have also been one of the weakest links in user security over the past 10+ years. 
 
 ### The Problems With Passwords
 
@@ -41,11 +41,9 @@ If I can get on the path between you and the server, I can get your password bec
 
 The server stores the hashed password, along with the passwords for all the other users. This means if I can get a copy of that data, I have a fair chance at cracking the password of at least a few users.
 
-<!-- TODO: Add reference to how fast passwords can be cracked. -->
+**Passwords are hard to remember:** As a result people tend to reuse their passwords or an easy to recognize password pattern. This means for a given user if their password on service `A` is compromised, there is a good chance you will be able guess their password on service `B`.
 
-**Passwords are hard to remember:** As a result people tend to reuse their passwords, or an easy to recognize password pattern. This means for a given user, if their password on service `A` is compromised, there is a good chance you will be able guess their password on service `B`.
-
-The two issues of services having direct access to a users password, and users reusing their passwords, combine to make passwords particularly easy to compromise. As a result the Information Security world has been looking for an alternative to passwords for over a decade, or at the very least augment password with things like Multi-Factor Authentication (MFA) and [WebAuthN](https://www.w3.org/TR/webauthn-2/).
+The two issues of services having direct access to a user's password, and users reusing their passwords, combine to make passwords particularly easy to compromise. As a result the Information Security world has been looking for an alternative to passwords for over a decade, or at the very least augment password with things like Multi-Factor Authentication (MFA) and [WebAuthN](https://www.w3.org/TR/webauthn-2/).
 
 ## WebAuthN, Passkeys and Why They Suck
 
