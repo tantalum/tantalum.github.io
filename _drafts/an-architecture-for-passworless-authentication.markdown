@@ -1,5 +1,5 @@
 ---
-title: "An Architecture for Passworless Authentication"
+title: "An Architecture for Passwordless Authentication"
 layout: post
 ---
 
@@ -9,9 +9,9 @@ This post describes an architecture for passwordless user authentication for con
 
 *Passwordless:* The goal is to allow the user to log into a web site without using or having to remember a password.
 
-*User:* We are focused on human users as apposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
+*User:* We are focused on human users as opposed to [service accounts](https://unix.stackexchange.com/questions/314725/what-is-the-difference-between-user-and-service-account).
 
-*Authentication:* This architecture is focused on [Authenticating](https://en.wikipedia.org/wiki/Authentication), i.e. verifying, a user's identity. This is oppose to [Authorization](https://en.wikipedia.org/wiki/Authorization), i.e. defining what a user is and isn't allowed to do.
+*Authentication:* This architecture is focused on [Authenticating](https://en.wikipedia.org/wiki/Authentication), i.e. verifying, a user's identity. This is opposed to [Authorization](https://en.wikipedia.org/wiki/Authorization), i.e. defining what a user is and isn't allowed to do.
 
 *Consumer-facing:* This is your run of the mill website where, today, users register with a username, email, and password. Users login by providing a username and password and are able to reset their password by requesting a magic link sent to their inbox. MFA might or might not be a requirement.
 
@@ -23,7 +23,7 @@ This architecture is indented to describe a framework for authenticating users t
 
 ## Current State: Passwords Have Eaten the Web
 
-Logging in with a username and password is a universally well understood and familiar UX pattern for users Passwords are portable, if user gets a new device and needs to log into a service all they have to do is type in their username and password no matter what device they are using. Passwords have also been one of the weakest links in user security over the past 10+ years. 
+Logging in with a username and password is a universally well understood and familiar UX pattern for users Passwords are portable, if a user gets a new device and needs to log into a service all they have to do is type in their username and password no matter what device they are using. Passwords have also been one of the weakest links in user security over the past 10+ years. 
 
 ### The Problems With Passwords
 
@@ -31,7 +31,7 @@ Logging in with a username and password is a universally well understood and fam
 
 **The password is sent to the server:** Sending the password to server means the server, and anyone who can control the server, has access to your raw password. 
 
-If I can try a bunch of guess with the server letting me know if the password is correct or not, I might be able to guess your password.
+If I can try a bunch of guesses with the server letting me know if the password is correct or not, I might be able to guess your password.
 
 If I can control the login page, I can get your password because you have to type it into the login page. 
 
@@ -50,7 +50,7 @@ The two issues of services having direct access to a user's password, and users 
 First for some definitions:
 
 - *Public Key Credential:* A public key that is associated with an account. A user authenticates by proving access to the private key associated with the public key credential. 
-- *[WebAuthN](https://www.w3.org/TR/webauthn-2/):* Is a browser API for creating a utilizing a public key credential.
+- *[WebAuthN](https://www.w3.org/TR/webauthn-2/):* Is a browser API for creating and utilizing a public key credential.
 - *[Passkey](https://www.passkeys.com/what-are-passkeys.html):* A public key credential that is compatible with WebAuthN.
 
 ### The Problems with Passkeys
@@ -91,7 +91,7 @@ A credential is an authentication mechanism and associated data. For example a p
 For our use case we are going to define two types of credentials:
 
 1. A Passkey Credential: A passkey credential contains an ID and a public key
-2. An Email Credential: An email credentials contains and ID and a verified email address.
+2. An Email Credential: An email credentials contains an ID and a verified email address.
 
 <!-- NOTE: Should valid be a more generic "state"? -->
 
@@ -172,7 +172,7 @@ sequenceDiagram
 
 #### Email Verification
 
-The email verification flow is used to validate that the user has access to the email address provided. This flow us used during registration to establish the initial Email Credential and any time the user wants to modify, or add, an Email Credential.
+The email verification flow is used to validate that the user has access to the email address provided. This flow is used during registration to establish the initial Email Credential and any time the user wants to modify, or add, an Email Credential.
 
 <pre class="mermaid">
 sequenceDiagram
@@ -210,7 +210,7 @@ sequenceDiagram
     Server->>User: Challenge nonce
     User->>Server: Signed challenge response
     Server->>DB: Get associated Passkey Challenge
-    alt Challenge and Signatire Valid
+    alt Challenge and Signature Valid
         Server->>DB: Set challenge as invalid since it was already used
     	Server->>User: Login Successful
     else Challenge or signature invalid
@@ -221,7 +221,7 @@ sequenceDiagram
 
 #### Magic Link Authentication
 
-Allows the user to login using to the registered email as a credential. When sending the link to the user the link should contain the nonce, and the server will lookup the challenge using the nonce. If the challenge is found and valid, the user can be authenticated. If the nonce is not found, or the challenge associated with the nonce is not longer valid, authentication is denined and the user is provided an error message. 
+Allows the user to login using the registered email as a credential. When sending the link to the user the link should contain the nonce, and the server will lookup the challenge using the nonce. If the challenge is found and valid, the user can be authenticated. If the nonce is not found, or the challenge associated with the nonce is no longer valid, authentication is denied and the user is provided an error message. 
 
 [User enumeration](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/03-Identity_Management_Testing/04-Testing_for_Account_Enumeration_and_Guessable_User_Account) is an important consideration here, especially when responding to the user after the Magic Link is requested. Most applications will respond to that request letting the requester know to either check their email address, or that the email address was invalid. This type of message easily allows an attacker to determine if a given email address has an account on the app or not. Instead apps should respond with a generic message letting the user know that if their email address was valid a magic link will be sent, and providing the same response when requesting a magic link regardless of whether the address was valid or not.
 
@@ -268,7 +268,7 @@ sequenceDiagram
     Server->>User: Challenge nonce + Creation options
     User->>Server: Signed challenge response + Public Key
     Server->>DB: Get associated Passkey Challenge
-    alt Challenge and Signatire Valid
+    alt Challenge and Signature Valid
         Server->>DB: Set challenge as invalid since it was already used
         Server->>DB: Store new validated Passkey Credential
     	Server->>User: New credential added
@@ -280,7 +280,7 @@ sequenceDiagram
 
 ## User Journeys
 
-Since we have the basic entities and flows defined, lets take a look and see how they fit together from a users perspective.
+Since we have the basic entities and flows defined, lets take a look and see how they fit together from a user's perspective.
 
 ### New User Registration
 
@@ -290,7 +290,7 @@ After the user submits the registration data to the server, the server will send
 
 One major issue to consider is how the system should react if a user loses their email address verification message. The system will need a way for the user to recover from that case. One option is to delete the incomplete users data if their email address is not verified within a given time frame. This will allow the user to re-attempt registration after a given period if they lose their verification message.
 
-Another option is to allow a user to re-register using the same email address if the email address hasn't been verified yet, including send a new email verification message. However this approach opens up the door for a timing attack where a user registers with an email address and a given passkey, and then an attacker immediately registers again with the same email address but using a passkey under the attackers control before the users has confirmed their email address. An unaware user might complete the registration process not knowing they just added an attacker-controlled credential to their account.
+Another option is to allow a user to re-register using the same email address if the email address hasn't been verified yet, including send a new email verification message. However this approach opens up the door for a timing attack where a user registers with an email address and a given passkey, and then an attacker immediately registers again with the same email address but using a passkey under the attackers control before the user has confirmed their email address. An unaware user might complete the registration process not knowing they just added an attacker-controlled credential to their account.
 
 ### User Login
 
@@ -298,11 +298,11 @@ After a user has completed the registration process, the next thing they would w
 
 ### User Login from New Device
 
-Now the user wants to login using a new device, or in other words they want to login without access to any valid passkey credentials. This is where the [magic link authentication](#magic-link-authentication) flow comes into play. The working assumption here is that the user has access to their email from the device they want to login from. The user would use the magic link authentication flow to login, and then use [add new passkey](#add-new-passkey-credeitial) flow to add a new Passkey Credential that is accessible from their new device.
+Now the user wants to login using a new device, or in other words they want to login without access to any valid passkey credentials. This is where the [magic link authentication](#magic-link-authentication) flow comes into play. The working assumption here is that the user has access to their email from the device they want to login from. The user would use the magic link authentication flow to login, and then use [add new passkey](#add-new-passkey-credential) flow to add a new Passkey Credential that is accessible from their new device.
 
 ## Why All This
 
-Passwords continue to be a weak link in the web security framework. Breach after breach dump millions of users passwords every couple of months. The architecture described above isn't just about using WebAuthN and Passkeys, it's about creating a versatile framework to support different authentication mechanisms allowing us to move beyond passwords to more secure login options.
+Passwords continue to be a weak link in the web security framework. Breach after breach dumps millions of users passwords every couple of months. The architecture described above isn't just about using WebAuthN and Passkeys, it's about creating a versatile framework to support different authentication mechanisms allowing us to move beyond passwords to more secure login options.
 
 <!-- --------------------------------------------- -->
 
