@@ -1,6 +1,8 @@
 ---
 title: "An Architecture for Passwordless Authentication"
 layout: post
+date: 2026-08-31
+tags: security,authentication,web,architecture
 ---
 
 ## Background and Scope: Who is This For
@@ -90,7 +92,7 @@ A credential is an authentication mechanism and associated data. For example a p
 
 For our use case we are going to define two types of credentials:
 
-1. A Passkey Credential: A passkey credential contains an ID and a public key
+1. A Passkey Credential: A passkey credential contains an ID and a public key. Since passkey public keys aren't made for human readability, we will also attach a description to the Passkey credential to help user track with Passkey is associated with which device.
 2. An Email Credential: An email credentials contains an ID and a verified email address.
 
 <!-- NOTE: Should valid be a more generic "state"? -->
@@ -104,6 +106,7 @@ classDiagram
     }
     class PasskeyCredential {
         +PublicKey publicKey
+        +String description
     }
     class EmailCredential {
         +String emailAddress
@@ -300,9 +303,38 @@ After a user has completed the registration process, the next thing they would w
 
 Now the user wants to login using a new device, or in other words they want to login without access to any valid passkey credentials. This is where the [magic link authentication](#magic-link-authentication) flow comes into play. The working assumption here is that the user has access to their email from the device they want to login from. The user would use the magic link authentication flow to login, and then use [add new passkey](#add-new-passkey-credential) flow to add a new Passkey Credential that is accessible from their new device.
 
+### Account Recovery
+
+Account recovery follows the same process as logging in from a new device. If a user losses access to all their Passkey devices, they can still log in using the [magic link authentication](#magic-link-authentication) flow and add a new credential for their new device. If the user loses access to all of their devices and their email account, the user would loose access to their account. This would be no different from a user forgetting their password and losing access to their email account.
+
+### Removing a Passkey Credential
+
+This is a simple operation that needs to be provided to the user. When a user no longer controls a device they will want to remove the passkey associated with that device. This is a simple operation that doesn't need a separate flow diagram.
+
 ## Why All This
 
-Passwords continue to be a weak link in the web security framework. Breach after breach dumps millions of users passwords every couple of months. The architecture described above isn't just about using WebAuthN and Passkeys, it's about creating a versatile framework to support different authentication mechanisms allowing us to move beyond passwords to more secure login options.
+Passwords continue to be a weak link in the web security framework. Breach after breach dumps millions of users passwords every couple of months. The architecture described above isn't just about using WebAuthN and Passkeys, it's about creating a versatile framework to support different authentication mechanisms allowing us to move beyond passwords to more secure login options. Removing passwords from your authentication flow removes whole classes of vulnerabilities that you will no longer have to deal with. Passkeys and WebAuthN have their own set of security and usability issues, but they have proven to be much more manageable compared to passwords. 
+
+To dive into the details of Passkeys and WebAuthN check out [webauthn.io](https://webauthn.io/) for language specific libraries and tutorials, and the [W3C Web Authentication Standard](https://www.w3.org/TR/webauthn-2/) for the full specifications.
+
+## Glossary
+
+Passkey
+: A Private and Public key pair used for authenticating a user to a service.
+
+WebAuthN
+: A standard and API for accessing and authenticating using Passkeys.
+
+MFA
+: *M*ulti-*F*actor *A*uthentication - a security process that requires users to provide two or more distinct forms of verification to confirm their identity.
+
+NIST
+: *N*ational *I*nstitute of *S*tandards and *T*echnology.
+
+OOB
+: *O*ut *O*f *B*ounds -  Utilizing a process that is outside the scope of the current operation.
+
+
 
 <!-- --------------------------------------------- -->
 
